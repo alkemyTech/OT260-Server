@@ -1,0 +1,21 @@
+default: &default
+  adapter: postgresql
+  encoding: unicode
+  username: <%= ENV.fetch('DB_USER') %>
+  password: <%= ENV.fetch('DB_PASSWORD') %>
+  pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
+  host: <%= ENV.fetch('DB_HOST') %>
+
+development:
+  <<: *default
+  database: OT260_Server_development
+
+test:
+  <<: *default
+  database: OT260_Server_test
+
+production:
+  <<: *default
+  database: OT260_Server_production
+  username: OT260_Server
+  password: <%= ENV['OT260_SERVER_DATABASE_PASSWORD'] %>
