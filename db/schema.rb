@@ -64,6 +64,18 @@ ActiveRecord::Schema.define(version: 2022_07_14_120555) do
     t.index ["discarded_at"], name: "index_members_on_discarded_at"
   end
 
+  create_table "news", force: :cascade do |t|
+    t.string "name", null: false
+    t.text "content", null: false
+    t.string "image", null: false
+    t.bigint "category_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.datetime "discarded_at"
+    t.index ["category_id"], name: "index_news_on_category_id"
+    t.index ["discarded_at"], name: "index_news_on_discarded_at"
+  end
+
   create_table "roles", force: :cascade do |t|
     t.string "name", null: false
     t.string "description"
@@ -73,4 +85,5 @@ ActiveRecord::Schema.define(version: 2022_07_14_120555) do
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
+  add_foreign_key "news", "categories"
 end
