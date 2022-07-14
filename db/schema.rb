@@ -43,6 +43,15 @@ ActiveRecord::Schema.define(version: 2022_07_14_120555) do
     t.index ["blob_id", "variation_digest"], name: "index_active_storage_variant_records_uniqueness", unique: true
   end
 
+  create_table "categories", force: :cascade do |t|
+    t.string "name", null: false
+    t.string "description"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.datetime "discarded_at"
+    t.index ["discarded_at"], name: "index_categories_on_discarded_at"
+  end
+
   create_table "members", force: :cascade do |t|
     t.string "name", null: false
     t.string "facebook_url"
