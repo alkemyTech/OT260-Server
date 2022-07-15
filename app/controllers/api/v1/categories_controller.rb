@@ -3,11 +3,18 @@
 module Api
   module V1
     class CategoriesController < ApplicationController
-      before_action :authenticate_request, only: [:create]
-      before_action :authorize_user, only: %i[show create]
+      before_action :authenticate_request, only: %i[index show create]
+      before_action :authorize_user, only: %i[index show create]
+
+      def index
+        @categories = Category.kept
+        @cat_serializer = CategorySerializer.new(@categories,
+                                                 { fields: { category: [:name] } })
+        render json: @cat_serializer.serializable_hash
+      end
 
       def show
-        render json: CategoriesSerializer.new(@categories).serializable_hash.to_json
+        render json: CategoriesSerializer.new(@categories).serializable_hash
       end
 
       def create
