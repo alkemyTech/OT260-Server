@@ -27,10 +27,6 @@ Metrics/BlockLength:
 Metrics/MethodLength:
   Max: 15
 
-Metrics/AbcSize:
-  Exclude:
-    - app/controllers/api/v1/authentication_controller.rb
-
 Lint/DuplicateBranch:
   Exclude:
     - app/controllers/concerns/authenticable.rb 
