@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_07_14_124321) do
+ActiveRecord::Schema.define(version: 2022_07_15_183439) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -96,7 +96,18 @@ ActiveRecord::Schema.define(version: 2022_07_14_124321) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
+  create_table "slides", force: :cascade do |t|
+    t.string "image_url"
+    t.string "text"
+    t.string "order"
+    t.bigint "organization_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["organization_id"], name: "index_slides_on_organization_id"
+  end
+
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
   add_foreign_key "news", "categories"
+  add_foreign_key "slides", "organizations"
 end
