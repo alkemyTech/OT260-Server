@@ -25,5 +25,6 @@ FactoryBot.define do
     image_url { 'MyString' }
     text { 'MyString' }
     order { 0 }
+    organization { nil }
   end
 end

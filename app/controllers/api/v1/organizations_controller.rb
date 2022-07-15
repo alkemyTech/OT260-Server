@@ -4,7 +4,7 @@ module Api
   module V1
     class OrganizationsController < ApplicationController
       before_action :set_organization
-      before_action :authorize_request, only: :public
+      before_action :authenticate_request, only: :public
 
       def public
         render json: OrganizationSerializer.new(@organization,

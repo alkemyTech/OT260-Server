@@ -2,7 +2,7 @@
 
 module Authorizable
   extend ActiveSupport::Concern
-  def authorization
+  def authorize_user
     render json: { error: 'You are not an administrator' }, status: :forbidden unless admin?
   end
 
