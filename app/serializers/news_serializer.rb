@@ -23,12 +23,8 @@
 #
 #  fk_rails_...  (category_id => categories.id)
 #
-FactoryBot.define do
-  factory :news do
-    content { 'MyString' }
-    image { 'MyString' }
-    name { 'MyString' }
-    news_type { 'news' }
-    category { nil }
-  end
+class NewsSerializer
+  include JSONAPI::Serializer
+  attributes :content, :name, :image
+  belongs_to :category
 end
