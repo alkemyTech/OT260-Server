@@ -23,7 +23,7 @@ class Organization < ApplicationRecord
   include Discard::Model
 
   has_one_attached :image
-  has_many :slides
+  has_many :slides, dependent: :nullify
 
   validates :name, :email, :welcome_text, presence: true
   validates :phone, numericality: { only_integer: true }, allow_blank: true

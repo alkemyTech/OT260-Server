@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # == Schema Information
 #
 # Table name: slides
@@ -20,9 +22,9 @@
 #
 FactoryBot.define do
   factory :slide do
-    image_url { "MyString" }
-    text { "MyString" }
-    order { "MyString" }
+    image_url { 'MyString' }
+    text { 'MyString' }
+    order { 'MyString' }
     organization { nil }
   end
 end
