@@ -3,7 +3,7 @@ class CreateSlides < ActiveRecord::Migration[6.1]
     create_table :slides do |t|
       t.string :image_url
       t.string :text
-      t.string :order
+      t.integer :order
       t.references :organization, null: false, foreign_key: true
 
       t.timestamps

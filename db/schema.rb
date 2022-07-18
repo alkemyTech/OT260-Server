@@ -99,7 +99,7 @@ ActiveRecord::Schema.define(version: 2022_07_15_230147) do
   create_table "slides", force: :cascade do |t|
     t.string "image_url"
     t.string "text"
-    t.string "order"
+    t.integer "order"
     t.bigint "organization_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
