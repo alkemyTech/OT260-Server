@@ -27,6 +27,7 @@
 #
 class User < ApplicationRecord
   include Discard::Model
+  has_secure_password
 
   belongs_to :role
 
