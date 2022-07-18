@@ -10,6 +10,7 @@ Rails.application.routes.draw do
         get 'public', on: :member
       end
       resources :news, only: %i[show create]
+      resources :users, only: [:index]
     end
   end
   

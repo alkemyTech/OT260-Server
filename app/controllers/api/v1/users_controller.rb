@@ -6,7 +6,13 @@ module Api
   module V1
     class UsersController < ApplicationController
       before_action :set_user, only: :login
-      before_action :authenticate_request, only: :me
+      before_action :authenticate_request, only: %i[index me create]
+      before_action :authorize_user, only: %i[index me create]
+
+      def index
+        @users = User.kept
+        render json: UserSerializer.new(@users).serializable_hash.to_json
+      end
 
       def me
         render json: UserSerializer.new(@current_user).serializable_hash, status: :ok
