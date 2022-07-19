@@ -4,10 +4,7 @@ module Api
   module V1
     class UsersController < ApplicationController
       before_action :fetch_user_by_email, only: [:login]
-
-      def fetch_user_by_email
-        @user = User.find_by(email: params[:user][:email])
-      end
+      before_action :authorize_request, except: [:login]
 
       def login
         if @user&.authenticate(params[:user][:password])
@@ -22,8 +19,8 @@ module Api
 
       private
 
-      def login_params
-        params.permit(:email, :password)
+      def fetch_user_by_email
+        @user = User.find_by(email: params[:user][:email])
       end
     end
   end
