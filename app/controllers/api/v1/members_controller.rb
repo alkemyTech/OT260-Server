@@ -3,9 +3,9 @@
 module Api
   module V1
     class MembersController < ApplicationController
-      before_action :authenticate_request, only: %i[index create update]
+      before_action :authenticate_request, only: %i[index create update destroy]
       before_action :authorize_user, only: %i[index]
-      before_action :set_member, only: %i[update]
+      before_action :set_member, only: %i[update destroy]
 
       def index
         @members = Member.kept
@@ -31,6 +31,11 @@ module Api
         else
           render json: @member.errors, status: :unprocessable_entity
         end
+      end
+
+      def destroy
+        @member.discard
+        head :no_content
       end
 
       private
