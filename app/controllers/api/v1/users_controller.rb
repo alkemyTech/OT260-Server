@@ -6,12 +6,17 @@ module Api
   module V1
     class UsersController < ApplicationController
       before_action :set_user, only: :login
+      before_action :authorize_request, only: :me
+
+      def me
+        render json: UserSerializer.new(@current_user).serializable_hash, status: :ok
+      end
 
       def create
         @user = User.new(user_params)
         @user.role = Role.find(params[:user][:role_id])
         if @user.save
-          token = JsonWebToken.encode(user_id: @user)
+          token = JsonWebToken.encode(user_id: @user.id)
           render json: {
             user: UserSerializer.new(@user).serializable_hash,
             token: token
@@ -24,8 +29,8 @@ module Api
       def login
         if @user.authenticate(params[:user][:password])
           token = JsonWebToken.encode(user_id: @user.id)
-          time = Time.zone.now + 24.hours.to_i
-          render json: { token: token, exp: time.strftime('%m-%d-%Y %H:%M'),
+          render json: { token: token,
+                         exp: 1.minute.after(Time.zone.now).strftime('%m-%d-%Y %H:%M'),
                          username: @user.first_name }, status: :ok
         else
           render json: { error: 'unauthorized' }, status: :unauthorized
@@ -35,7 +40,7 @@ module Api
       private
 
       def set_user
-        @user = User.find_by(email: params[:user][:email])
+        @user = User.find_by!(email: params[:user][:email])
       end
 
       def user_params
