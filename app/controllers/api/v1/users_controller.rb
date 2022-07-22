@@ -5,9 +5,8 @@ require 'json_web_token'
 module Api
   module V1
     class UsersController < ApplicationController
-<<<<<<< HEAD
       before_action :authorize_request, except: :create
-=======
+
       def create
         @user = User.new(user_params)
         if @user.save
@@ -32,7 +31,6 @@ module Api
         render json: { errors: @user.errors.full_messages },
                status: :unprocessable_entity
       end
->>>>>>> OT260-50 Return token to the user after registering on the site
     end
   end
 end
