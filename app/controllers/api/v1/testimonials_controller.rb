@@ -6,6 +6,13 @@ module Api
       before_action :authenticate_request, only: %i[create update destroy]
       before_action :authorize_user, only: %i[create update destroy]
       before_action :set_testimonial, only: %i[update destroy]
+      after_action { pagy_headers_merge(@pagy) if @pagy }
+      include Pagy::Backend
+
+      def index
+        @pagy, @testimonials = pagy(Category.kept)
+        render json: TestimonialSerializer.new(@testimonials).serializable_hash, status: :ok
+      end
 
       def create
         @testimonial = Testimonial.new(testimonial_params)
