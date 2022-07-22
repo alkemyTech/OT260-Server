@@ -24,6 +24,14 @@ Metrics/BlockLength:
     - config/**/*
     - spec/**/*
 
+Metrics/AbcSize:
+  Exclude:
+    - app/controllers/api/v1/authentication_controller.rb
+
+Lint/DuplicateBranch:
+  Exclude:
+    - app/controllers/application_controller.rb 
+
 Lint/AmbiguousBlockAssociation:
   Exclude:
     - spec/**/*
