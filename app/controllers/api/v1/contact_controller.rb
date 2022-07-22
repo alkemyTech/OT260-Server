@@ -2,7 +2,7 @@
 
 module Api
   module V1
-    class SlidesController < ApplicationController
+    class ContactController < ApplicationController
     end
   end
 end
