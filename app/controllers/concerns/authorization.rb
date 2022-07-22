@@ -8,4 +8,12 @@ module Authorization
   def admin?
     @current_user.role.name == 'administrator'
   end
+
+  def owner?
+    params[:id].to_i == @current_user.id
+  end
+
+  def ownership?
+    render json: { errors: 'Unauthorized access' }, status: :forbidden unless admin? || owner?
+  end
 end
