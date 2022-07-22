@@ -17,3 +17,4 @@ module Authorization
     render json: { errors: 'Unauthorized access' }, status: :forbidden unless admin? || owner?
   end
 end
+
