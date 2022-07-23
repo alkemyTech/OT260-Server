@@ -18,6 +18,8 @@
 #
 #  fk_rails_...  (organization_id => organizations.id)
 #
-class Slide < ApplicationRecord
-  belongs_to :organization
+class SlideSerializer
+  include JSONAPI::Serializer
+  attributes :image_url, :text, :order
+  belongs_to :organizations
 end

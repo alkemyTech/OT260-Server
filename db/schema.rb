@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_07_15_230147) do
+ActiveRecord::Schema.define(version: 2022_07_22_202117) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -50,6 +50,16 @@ ActiveRecord::Schema.define(version: 2022_07_15_230147) do
     t.datetime "updated_at", precision: 6, null: false
     t.datetime "discarded_at"
     t.index ["discarded_at"], name: "index_categories_on_discarded_at"
+  end
+
+  create_table "contacts", force: :cascade do |t|
+    t.string "name"
+    t.integer "phone"
+    t.string "email"
+    t.string "message"
+    t.string "deletedAt"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
   end
 
   create_table "members", force: :cascade do |t|
@@ -99,7 +109,7 @@ ActiveRecord::Schema.define(version: 2022_07_15_230147) do
   create_table "slides", force: :cascade do |t|
     t.string "image_url"
     t.string "text"
-    t.string "order"
+    t.integer "order"
     t.bigint "organization_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
