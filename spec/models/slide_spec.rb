@@ -1,11 +1,12 @@
+# frozen_string_literal: true
+
 # == Schema Information
 #
 # Table name: slides
 #
 #  id              :bigint           not null, primary key
-#  image_url       :string
-#  order           :string
-#  text            :string
+#  order           :integer          not null
+#  text            :text             not null
 #  created_at      :datetime         not null
 #  updated_at      :datetime         not null
 #  organization_id :bigint           not null

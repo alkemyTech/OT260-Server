@@ -22,8 +22,6 @@
 class Organization < ApplicationRecord
   include Discard::Model
 
-  has_one_attached :image
-
   validates :name, :email, :welcome_text, presence: true
   validates :phone, numericality: { only_integer: true }, allow_blank: true
   validates :email, format: { with: /[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,6}/ }
