@@ -3,9 +3,18 @@
 module Api
   module V1
     class SlidesController < ApplicationController
-      before_action :authenticate_request, only: %i[show create update destroy]
-      before_action :authorize_user, only: %i[show create update destroy]
+      before_action :authenticate_request, only: %i[index show create update destroy]
+      before_action :authorize_user, only: %i[index show create update destroy]
       before_action :set_slide, only: %i[show update destroy]
+
+      def index
+        @slides = Slide.all
+        render json: SlideSerializer.new(@slides,
+                                         { fields: {
+                                           slide: %i[image order]
+                                         } })
+                                    .serializable_hash, status: :ok
+      end
 
       def show
         if @slide
