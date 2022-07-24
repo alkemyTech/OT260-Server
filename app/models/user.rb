@@ -4,16 +4,16 @@
 #
 # Table name: users
 #
-#  id           :bigint           not null, primary key
-#  discarded_at :datetime
-#  email        :string           not null
-#  first_name   :string           not null
-#  last_name    :string           not null
-#  password     :string           not null
-#  photo        :string
-#  created_at   :datetime         not null
-#  updated_at   :datetime         not null
-#  role_id      :bigint           not null
+#  id              :bigint           not null, primary key
+#  discarded_at    :datetime
+#  email           :string           not null
+#  first_name      :string           not null
+#  last_name       :string           not null
+#  password_digest :string           not null
+#  photo           :string
+#  created_at      :datetime         not null
+#  updated_at      :datetime         not null
+#  role_id         :bigint           not null
 #
 # Indexes
 #
@@ -31,6 +31,6 @@ class User < ApplicationRecord
 
   belongs_to :role
 
-  validates :first_name, :last_name, :email, :password_digest, presence: true
+  validates :first_name, :last_name, :email, :password, presence: true
   validates :email, uniqueness: true
 end
