@@ -6,10 +6,11 @@ Rails.application.routes.draw do
       post 'auth/register', to: 'users#create'
       
       resources :categories, only: %i[index create show update destroy]
+      resources :members, only: [:index]
+      resources :news, only: %i[show create update destroy]
       resources :organizations, only: [] do
         get 'public', on: :member
       end
-      resources :news, only: %i[show create update destroy]
       resources :users, only: %i[index update]
     end
   end
