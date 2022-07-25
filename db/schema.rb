@@ -43,6 +43,15 @@ ActiveRecord::Schema.define(version: 2022_07_25_024539) do
     t.index ["blob_id", "variation_digest"], name: "index_active_storage_variant_records_uniqueness", unique: true
   end
 
+  create_table "activities", force: :cascade do |t|
+    t.string "name", null: false
+    t.text "content", null: false
+    t.datetime "discarded_at"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["discarded_at"], name: "index_activities_on_discarded_at"
+  end
+
   create_table "categories", force: :cascade do |t|
     t.string "name", null: false
     t.string "description"
