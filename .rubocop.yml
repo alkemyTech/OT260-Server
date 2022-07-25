@@ -24,13 +24,12 @@ Metrics/BlockLength:
     - config/**/*
     - spec/**/*
 
-Metrics/AbcSize:
-  Exclude:
-    - app/controllers/api/v1/authentication_controller.rb
+Metrics/MethodLength:
+  Max: 15
 
 Lint/DuplicateBranch:
   Exclude:
-    - app/controllers/application_controller.rb 
+    - app/controllers/concerns/authenticable.rb 
 
 Lint/AmbiguousBlockAssociation:
   Exclude:

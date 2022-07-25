@@ -1,3 +1,8 @@
+<<<<<<< HEAD
+=======
+# frozen_string_literal: true
+
+>>>>>>> a2f41c10f3c85cb832fb9d1f5e41659b0a0fec9c
 # == Schema Information
 #
 # Table name: slides

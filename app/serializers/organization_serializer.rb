@@ -19,13 +19,7 @@
 #
 #  index_organizations_on_discarded_at  (discarded_at)
 #
-class Organization < ApplicationRecord
-  include Discard::Model
-
-  has_one_attached :image
-  has_many :slides, dependent: :destroy
-
-  validates :name, :email, :welcome_text, presence: true
-  validates :phone, numericality: { only_integer: true }, allow_blank: true
-  validates :email, format: { with: /[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,6}/ }
+class OrganizationSerializer
+  include JSONAPI::Serializer
+  attributes :name, :address, :email, :phone, :welcome_text, :about_us_text
 end

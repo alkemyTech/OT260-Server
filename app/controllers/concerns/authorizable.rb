@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
-module Authorization
+module Authorizable
+  extend ActiveSupport::Concern
   def authorization
     render json: { error: 'You are not an administrator' }, status: :forbidden unless admin?
   end
