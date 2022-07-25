@@ -3,9 +3,9 @@
 module Api
   module V1
     class CategoriesController < ApplicationController
-      before_action :set_category, only: %i[show update]
-      before_action :authenticate_request, only: %i[index show create update]
-      before_action :authorize_user, only: %i[index show create update]
+      before_action :set_category, only: %i[show update destroy]
+      before_action :authenticate_request, only: %i[index show create update destroy]
+      before_action :authorize_user, only: %i[index show create update destroy]
 
       def index
         @categories = Category.kept
@@ -32,11 +32,13 @@ module Api
       end
 
       def update
-        if @category.update(category_params)
-          render json: CategorySerializer.new(@category).serializable_hash, status: :ok
-        else
-          render json: { errors: @category }, status: :unprocessable_entity
-        end
+        @category.update(category_params)
+        render json: CategorySerializer.new(@category).serializable_hash, status: :ok
+      end
+
+      def destroy
+        @category.discard
+        head :no_content
       end
 
       private
