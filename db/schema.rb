@@ -11,10 +11,14 @@
 # It's strongly recommended that you check this file into your version control system.
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 ActiveRecord::Schema.define(version: 2022_07_22_202117) do
 =======
 ActiveRecord::Schema.define(version: 2022_07_24_140602) do
 >>>>>>> a2f41c10f3c85cb832fb9d1f5e41659b0a0fec9c
+=======
+ActiveRecord::Schema.define(version: 2022_07_25_024539) do
+>>>>>>> 62d4f948f42925bc1b73d6fb6cc4a951b2aad339
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -45,6 +49,15 @@ ActiveRecord::Schema.define(version: 2022_07_24_140602) do
     t.bigint "blob_id", null: false
     t.string "variation_digest", null: false
     t.index ["blob_id", "variation_digest"], name: "index_active_storage_variant_records_uniqueness", unique: true
+  end
+
+  create_table "activities", force: :cascade do |t|
+    t.string "name", null: false
+    t.text "content", null: false
+    t.datetime "discarded_at"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["discarded_at"], name: "index_activities_on_discarded_at"
   end
 
   create_table "categories", force: :cascade do |t|
@@ -86,6 +99,7 @@ ActiveRecord::Schema.define(version: 2022_07_24_140602) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.datetime "discarded_at"
+    t.string "news_type", default: "news"
     t.index ["category_id"], name: "index_news_on_category_id"
     t.index ["discarded_at"], name: "index_news_on_discarded_at"
   end

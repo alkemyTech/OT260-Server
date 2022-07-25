@@ -3,7 +3,7 @@
 module Authenticable
   extend ActiveSupport::Concern
 
-  def authorize_request
+  def authenticate_request
     header = request.headers['Authorization']
     header = header.split.last if header
     begin
