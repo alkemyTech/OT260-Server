@@ -5,9 +5,11 @@ Rails.application.routes.draw do
       get 'auth/me', to: 'users#me'
       post 'auth/register', to: 'users#create'
       
+      resources :categories, only: %i[create]
       resources :organizations, only: [] do
         get 'public', on: :member
       end
     end
   end
+  
 end

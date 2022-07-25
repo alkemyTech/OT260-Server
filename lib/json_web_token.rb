@@ -2,7 +2,7 @@
 
 class JsonWebToken
   def self.encode(payload)
-    payload[:exp] = payload[:exp] || 1.minute.after(Time.zone.now).to_i
+    payload[:exp] = payload[:exp] || 15.minutes.after(Time.zone.now).to_i
     JWT.encode(payload, ENV.fetch('JWT_SECRET_KEY'))
   end
 
