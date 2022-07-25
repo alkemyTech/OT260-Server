@@ -26,6 +26,7 @@ class News < ApplicationRecord
   include Discard::Model
 
   belongs_to :category
+  has_many :comments, dependent: :destroy
 
   validates :name, :content, :image, presence: true
 end
