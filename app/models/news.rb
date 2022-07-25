@@ -9,6 +9,7 @@
 #  discarded_at :datetime
 #  image        :string           not null
 #  name         :string           not null
+#  news_type    :string           default("news")
 #  created_at   :datetime         not null
 #  updated_at   :datetime         not null
 #  category_id  :bigint           not null
