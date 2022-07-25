@@ -18,6 +18,7 @@ gem 'pg', '~> 1.1'
 gem 'puma', '~> 5.0'
 gem 'rack-cors', '~> 1.1', '>= 1.1.1'
 gem 'rswag', '~> 2.5', '>= 2.5.1'
+gem 'sendgrid-ruby', '~> 6.6', '>= 6.6.2'
 
 group :development, :test do
   gem 'factory_bot_rails', '~> 5.1', '>= 5.1.1'
