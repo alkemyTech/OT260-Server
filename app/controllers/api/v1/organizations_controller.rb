@@ -4,7 +4,7 @@ module Api
   module V1
     class OrganizationsController < ApplicationController
       before_action :set_organization
-      before_action :authorize_request, only: :public
+      before_action :authenticate_request, only: :public
 
       def public
         render json: OrganizationSerializer.new(@organization,
@@ -21,7 +21,7 @@ module Api
       private
 
       def set_organization
-        @organization = Organization.find(params[:id])
+        @organization = Organization.kept.find(params[:id])
       rescue ActiveRecord::RecordNotFound
         render json: { error: "Could not find organization with ID '#{params[:id]}'" },
                status: :unprocessable_entity
