@@ -4,6 +4,10 @@ Rails.application.routes.draw do
       post 'auth/login', to: 'users#login'
       get 'auth/me', to: 'users#me'
       post 'auth/register', to: 'users#create'
+      
+      resources :organizations, only: [] do
+        get 'public', on: :member
+      end
     end
   end
 end
