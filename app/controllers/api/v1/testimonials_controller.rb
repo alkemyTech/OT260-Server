@@ -3,9 +3,9 @@
 module Api
   module V1
     class TestimonialsController < ApplicationController
-      before_action :authenticate_request, only: %i[create update]
-      before_action :authorize_user, only: %i[create update]
-      before_action :set_testimonial, only: %i[update]
+      before_action :authenticate_request, only: %i[create update destroy]
+      before_action :authorize_user, only: %i[create update destroy]
+      before_action :set_testimonial, only: %i[update destroy]
 
       def create
         @testimonial = Testimonial.new(testimonial_params)
@@ -20,6 +20,11 @@ module Api
         else
           render json: @testimonial.errors, status: :unprocessable_entity
         end
+      end
+
+      def destroy
+        @testimonial.discard
+        head :no_content
       end
 
       private
