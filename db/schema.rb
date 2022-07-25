@@ -61,6 +61,16 @@ ActiveRecord::Schema.define(version: 2022_07_25_024539) do
     t.index ["discarded_at"], name: "index_categories_on_discarded_at"
   end
 
+  create_table "comments", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.bigint "news_id", null: false
+    t.text "body"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["news_id"], name: "index_comments_on_news_id"
+    t.index ["user_id"], name: "index_comments_on_user_id"
+  end
+
   create_table "members", force: :cascade do |t|
     t.string "name", null: false
     t.string "facebook_url"
@@ -96,6 +106,9 @@ ActiveRecord::Schema.define(version: 2022_07_25_024539) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.datetime "discarded_at"
+    t.string "facebook_url"
+    t.string "instagram_url"
+    t.string "linkedin_url"
     t.index ["discarded_at"], name: "index_organizations_on_discarded_at"
   end
 
@@ -142,6 +155,8 @@ ActiveRecord::Schema.define(version: 2022_07_25_024539) do
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
+  add_foreign_key "comments", "news"
+  add_foreign_key "comments", "users"
   add_foreign_key "news", "categories"
   add_foreign_key "slides", "organizations"
   add_foreign_key "users", "roles"
