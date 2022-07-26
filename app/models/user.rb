@@ -43,6 +43,7 @@ class User < ApplicationRecord
   has_secure_password
 
   belongs_to :role
+  has_many :comments, dependent: :destroy
 
   validates :first_name, :last_name, :email, :password, presence: true
   validates :email, uniqueness: true
