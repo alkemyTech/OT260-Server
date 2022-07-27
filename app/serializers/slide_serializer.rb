@@ -6,7 +6,7 @@
 #
 #  id              :bigint           not null, primary key
 #  image_url       :string
-#  order           :integer
+#  order           :string
 #  text            :string
 #  created_at      :datetime         not null
 #  updated_at      :datetime         not null
