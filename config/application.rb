@@ -24,6 +24,9 @@ module OT260Server
     # Initialize configuration defaults for originally generated Rails version.
     config.load_defaults 6.1
 
+    # Set spanish as a default language
+    config.i18n.default_locale = :es
+
     # Configuration for the application, engines, and railties goes here.
     #
     # These settings can be overridden in specific environments using the files
