@@ -17,10 +17,11 @@ gem 'jwt', '~> 2.3'
 gem 'pg', '~> 1.1'
 gem 'puma', '~> 5.0'
 gem 'rack-cors', '~> 1.1', '>= 1.1.1'
+gem 'rswag', '~> 2.5', '>= 2.5.1'
 
 group :development, :test do
   gem 'factory_bot_rails', '~> 5.1', '>= 5.1.1'
-  gem 'pry-byebug', '~> 3.9'
+  gem 'pry-byebug', '~> 3.9', platform: :mri
   gem 'pry-rails', '~> 0.3.9'
   gem 'rspec-rails', '~> 4.1'
 end
