@@ -3,7 +3,14 @@
 module Api
   module V1
     class CommentsController < ApplicationController
-      before_action :authenticate_request, only: %i[create]
+      before_action :authenticate_request, only: %i[index create]
+
+      def index
+        @comment = Comment.order('created_at DESC')
+        render json: CommentsSerializer.new(@comment,
+                                            fields: { comments: :body })
+                                       .serializable_hash.to_json
+      end
 
       def create
         @comment = Comment.new(comment_params)
