@@ -8,7 +8,7 @@ Rails.application.routes.draw do
       post 'auth/register', to: 'users#create'
 
       resources :categories, only: %i[index create show update destroy]
-      resources :comments, only: %i[index create]
+      resources :comments, only: %i[index create update]
       resources :members, only: %i[index create update destroy]
       resources :news, only: %i[show create update destroy]
       resources :activities, only: %i[create update]
