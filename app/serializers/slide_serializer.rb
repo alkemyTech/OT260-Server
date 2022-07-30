@@ -19,8 +19,11 @@
 #
 #  fk_rails_...  (organization_id => organizations.id)
 #
-require 'rails_helper'
-
-RSpec.describe Slide, type: :model do
-  pending "add some examples to (or delete) #{__FILE__}"
+class SlideSerializer
+  include JSONAPI::Serializer
+  attributes :text, :order
+  belongs_to :organization
+  attribute :image do |slide|
+    slide.image.service_url
+  end
 end

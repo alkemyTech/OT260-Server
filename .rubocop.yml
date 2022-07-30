@@ -19,6 +19,10 @@ AllCops:
 Layout/LineLength:
   Max: 100
 
+Metrics/AbcSize:
+  Exclude:
+    - 'app/controllers/api/v1/slides_controller.rb'
+
 Metrics/BlockLength:
   Exclude:
     - config/**/*

@@ -5,7 +5,6 @@
 # Table name: slides
 #
 #  id              :bigint           not null, primary key
-#  image_url       :string
 #  order           :integer
 #  text            :string
 #  created_at      :datetime         not null
