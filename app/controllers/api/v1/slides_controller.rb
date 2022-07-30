@@ -3,8 +3,9 @@
 module Api
   module V1
     class SlidesController < ApplicationController
-      before_action :authenticate_request, only: %i[create]
-      before_action :authorize_user, only: %i[create]
+      before_action :authenticate_request, only: %i[create update]
+      before_action :authorize_user, only: %i[create update]
+      before_action :set_slide, only: :update
 
       def create
         @slide = Slide.new(slide_params)
@@ -17,7 +18,21 @@ module Api
         end
       end
 
+      def update
+        if @slide.update(slide_params)
+          render json: SlideSerializer.new(@slide).serializable_hash.to_json, status: :ok
+        else
+          render json: @slide.errors, status: :unprocessable_entity
+        end
+      end
+
       private
+
+      def set_slide
+        @slide = Slide.find(params[:id])
+      rescue ActiveRecord::RecordNotFound
+        render json: { error: "Could not find member with ID '#{params[:id]}'" }
+      end
 
       def slide_params
         params.require(:slide).permit(:text, :order, :image)

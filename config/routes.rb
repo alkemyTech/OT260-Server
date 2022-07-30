@@ -13,7 +13,7 @@ Rails.application.routes.draw do
       resources :organizations, only: [] do
         get 'public', on: :member
       end
-      resources :slides, only: :create
+      resources :slides, only: %i[create update]
       resources :users, only: %i[index update]
     end
   end
