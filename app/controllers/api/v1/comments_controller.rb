@@ -10,7 +10,7 @@ module Api
         @comment = Comment.order('created_at DESC')
         render json: CommentsSerializer.new(@comment,
                                             fields: { comments: :body })
-                                       .serializable_hash.to_json
+                                       .serializable_hash, status: :ok
       end
 
       def create
@@ -25,7 +25,7 @@ module Api
       end
 
       def update
-        if @current_user.id == @comment.user_id || admin?
+        if ownership?
           @comment = Comment.update(comment_params)
           render json: CommentsSerializer.new(@comment).serializable_hash
         else
@@ -34,7 +34,7 @@ module Api
       end
 
       private
-      
+
       def set_comment
         @comment = Comment.find(params[:id])
       end
@@ -47,7 +47,6 @@ module Api
         render json: { errors: @comment.errors.full_messages },
                status: :unprocessable_entity
       end
-
     end
   end
 end
