@@ -6,9 +6,11 @@ module Api
       before_action :authenticate_request, only: %i[index create update destroy]
       before_action :authorize_user, only: %i[index]
       before_action :set_member, only: %i[update destroy]
+      after_action { pagy_headers_merge(@pagy) if @pagy }
+      include Pagy::Backend
 
       def index
-        @members = Member.kept
+        @pagy, @members = pagy(Member.kept)
         render json: MembersSerializer.new(@members).serializable_hash, status: :ok
       end
 
