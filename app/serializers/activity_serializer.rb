@@ -20,6 +20,6 @@ class ActivitySerializer
   attributes :name, :content
 
   attributes :image_url do |activity|
-    activity.image.attached? ? activity.image.url : ''
+    activity.image.service_url
   end
 end

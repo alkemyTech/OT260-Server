@@ -26,14 +26,14 @@ module Api
 
       private
 
-      def activity_params
-        params.require(:activity).permit(:name, :content, :image)
-      end
-
       def set_activity
         @activity = Activity.kept.find(params[:id])
       rescue ActiveRecord::RecordNotFound
         render json: { error: "Couldn't find activity with ID #{params[:id]}" }, status: :not_found
+      end
+
+      def activity_params
+        params.require(:activity).permit(:name, :content, :image)
       end
     end
   end
