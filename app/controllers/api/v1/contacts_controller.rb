@@ -7,7 +7,7 @@ module Api
 
       def index
         @contact = @current_user.contacts.all
-        render json: ContactSerializer.new(@contact).serializable_hash
+        render json: ContactSerializer.new(@contact).serializable_hash, status: :ok
       end
     end
   end

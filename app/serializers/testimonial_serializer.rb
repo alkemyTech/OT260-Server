@@ -18,7 +18,7 @@
 class TestimonialSerializer
   include JSONAPI::Serializer
   attributes :name, :content
-  attribute :image do |object|
-    object.image.url if object.image.filename
+  attribute :image do |testimonial|
+    testimonial.image.service_url if testimonial.image.attached?
   end
 end
