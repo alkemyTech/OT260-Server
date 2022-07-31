@@ -24,6 +24,7 @@ module Api
         @user.role = Role.find(params[:user][:role_id])
         if @user.save
           token = JsonWebToken.encode(user_id: @user.id)
+          WelcomeMailer.send_welcome_email(@user).deliver
           render json: {
             user: UserSerializer.new(@user).serializable_hash,
             token: token

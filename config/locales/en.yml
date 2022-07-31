@@ -39,3 +39,6 @@ en:
   activity_3:
     name: 'Tutorships'
     content: 'It is a program aimed at young people from the third year of high school, whose objective is to guarantee their permanence in school and build a life project that gives meaning to school. The objective of this proposal is to achieve the school integration of children and young people from the neighborhood by promoting the appropriate socio-educational and emotional support, developing the necessary indispensable resources through the articulation of our interventions with the schools that house them, with the families of the students and with the corresponding municipal, provincial and national authorities.'
+  welcome_emailer_mailer:
+    send_welcome_email:
+      subject: "Bienvenido a Somos Mas!"
