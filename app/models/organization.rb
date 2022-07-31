@@ -31,4 +31,8 @@ class Organization < ApplicationRecord
   validates :name, :email, :welcome_text, presence: true
   validates :phone, numericality: { only_integer: true }, allow_blank: true
   validates :email, format: { with: /[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,6}/ }
+
+  def organization_slides
+    slides.order(:order)
+  end
 end

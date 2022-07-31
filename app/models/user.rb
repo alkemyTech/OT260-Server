@@ -33,6 +33,6 @@ class User < ApplicationRecord
   has_many :comments, dependent: :destroy
   has_many :contacts, dependent: :nullify
 
-  validates :first_name, :last_name, :email, :password, presence: true
+  validates :first_name, :last_name, :email, :password_digest, presence: true
   validates :email, uniqueness: true
 end
