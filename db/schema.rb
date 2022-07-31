@@ -106,6 +106,9 @@ ActiveRecord::Schema.define(version: 2022_07_25_234205) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.datetime "discarded_at"
+    t.string "facebook_url"
+    t.string "instagram_url"
+    t.string "linkedin_url"
     t.index ["discarded_at"], name: "index_organizations_on_discarded_at"
   end
 
