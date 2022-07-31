@@ -15,11 +15,11 @@
 #
 #  index_activities_on_discarded_at  (discarded_at)
 #
-class Activity < ApplicationRecord
-  include Discard::Model
+class ActivitySerializer
+  include JSONAPI::Serializer
+  attributes :name, :content
 
-  has_one_attached :image
-
-  validates :name, presence: true, length: { minimum: 2 }
-  validates :content, presence: true, length: { minimum: 20 }
+  attributes :image_url do |activity|
+    activity.image.attached? ? activity.image.url : ''
+  end
 end
