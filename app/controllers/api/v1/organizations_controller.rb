@@ -14,6 +14,7 @@ module Api
                                                   image
                                                   phone
                                                   address
+                                                  organization_slides
                                                 ] })
                                            .serializable_hash, status: :ok
       end

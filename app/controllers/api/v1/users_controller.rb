@@ -34,7 +34,7 @@ module Api
       end
 
       def login
-        if @user.authenticate(params[:user][:password])
+        if @user.authenticate(params[:user][:password_digest])
           token = JsonWebToken.encode(user_id: @user.id)
           render json: { token: token,
                          exp: 15.minutes.after(Time.zone.now).strftime('%m-%d-%Y %H:%M'),
@@ -65,7 +65,7 @@ module Api
       end
 
       def user_params
-        params.require(:user).permit(:first_name, :last_name, :email, :password, :photo)
+        params.require(:user).permit(:first_name, :last_name, :email, :password_digest, :photo)
       end
 
       def render_error

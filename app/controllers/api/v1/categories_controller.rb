@@ -15,7 +15,7 @@ module Api
       end
 
       def show
-        render json: CategoriesSerializer.new(@categories).serializable_hash, status: :ok
+        render json: CategorySerializer.new(@categories).serializable_hash, status: :ok
       end
 
       def create
