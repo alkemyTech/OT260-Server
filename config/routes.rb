@@ -14,7 +14,7 @@ Rails.application.routes.draw do
       resources :organizations, only: [] do
         get 'public', on: :member
       end
-      resources :slides, only: %i[create update destroy]
+      resources :slides, only: %i[show create update destroy]
       resources :users, only: %i[index update destroy]
     end
   end
