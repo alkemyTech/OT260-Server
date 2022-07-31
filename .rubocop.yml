@@ -17,7 +17,7 @@ AllCops:
     - testing/vendor/**/*
 
 Layout/LineLength:
-  Max: 100
+  Max: 105
 
 Metrics/AbcSize:
   Exclude:
