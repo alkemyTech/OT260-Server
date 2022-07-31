@@ -3,19 +3,20 @@
 module Api
   module V1
     class CommentsController < ApplicationController
-      before_action :authenticate_request, only: %i[index create]
+      before_action :authenticate_request, only: %i[index create update]
+      before_action :set_comment, only: %i[update]
 
       def index
         @comment = Comment.order('created_at DESC')
         render json: CommentsSerializer.new(@comment,
                                             fields: { comments: :body })
-                                       .serializable_hash.to_json
+                                       .serializable_hash, status: :ok
       end
 
       def create
         @comment = Comment.new(comment_params)
-        @comment.user = User.find(params[:user_id])
-        @comment.news = News.find(params[:news_id])
+        @comment.user = @current_user
+        @comment.news = @current_user.news.find(params[:news_id])
         if @comment.save
           render json: CommentsSerializer.new(@comment).serializable_hash, status: :created
         else
@@ -23,7 +24,20 @@ module Api
         end
       end
 
+      def update
+        if ownership?
+          @comment = Comment.update(comment_params)
+          render json: CommentsSerializer.new(@comment).serializable_hash
+        else
+          render json: { error: 'unauthorized' }, status: :unauthorized
+        end
+      end
+
       private
+
+      def set_comment
+        @comment = Comment.find(params[:id])
+      end
 
       def comment_params
         params.require(:comment).permit(:body)
