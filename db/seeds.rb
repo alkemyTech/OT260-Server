@@ -54,3 +54,15 @@ end
 puts 'Users created:'
 
 User.all.each { |user| puts "*#{user.email}" }
+
+Activity.destroy_all
+
+puts 'Creating activities...'
+
+Activity.create!([
+  { name: I18n.t('activity_1.name'), content: I18n.t('activity_1.content') },
+  { name: I18n.t('activity_2.name'), content: I18n.t('activity_2.content') },
+  { name: I18n.t('activity_3.name'), content: I18n.t('activity_3.content') }
+])
+
+puts 'Activities created!!!'
