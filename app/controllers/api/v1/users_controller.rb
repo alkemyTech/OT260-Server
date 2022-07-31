@@ -5,8 +5,9 @@ require 'json_web_token'
 module Api
   module V1
     class UsersController < ApplicationController
+      before_action :set_user, only: :destroy
       before_action :set_user_for_login, only: :login
-      before_action :authenticate_request, only: %i[index me update]
+      before_action :authenticate_request, only: %i[index me update destroy]
       before_action :authorize_user, only: %i[index me]
 
       def index
@@ -48,7 +49,16 @@ module Api
         render json: UserSerializer.new(@user).serializable_hash.to_json
       end
 
+      def destroy
+        @user.discard
+        head :no_content
+      end
+
       private
+
+      def set_user
+        @user = User.kept.find(params[:id])
+      end
 
       def set_user_for_login
         @user = User.kept.find_by!(email: params[:user][:email])
