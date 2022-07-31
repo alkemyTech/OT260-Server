@@ -3,19 +3,30 @@
 module Api
   module V1
     class TestimonialsController < ApplicationController
-      before_action :authenticate_request, only: %i[create]
-      before_action :authorize_user, only: %i[create]
+      before_action :authenticate_request, only: %i[create update]
+      before_action :authorize_user, only: %i[create update]
+      before_action :set_testimonial, only: %i[update]
 
       def create
         @testimonial = Testimonial.new(testimonial_params)
         if @testimonial.save
           render json: TestimonialSerializer.new(@testimonial).serializable_hash, status: :created
+        end
+      end
+
+      def update
+        if @testimonial.update(testimonial_params)
+          render json: TestimonialSerializer.new(@testimonial).serializable_hash, status: :ok
         else
           render json: @testimonial.errors, status: :unprocessable_entity
         end
       end
 
       private
+
+      def set_testimonial
+        @testimonial = Testimonial.kept.find(params[:id])
+      end
 
       def testimonial_params
         params.require(:testimonial).permit(:image, :name, :content)
