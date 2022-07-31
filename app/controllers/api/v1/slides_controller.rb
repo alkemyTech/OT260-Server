@@ -3,9 +3,9 @@
 module Api
   module V1
     class SlidesController < ApplicationController
-      before_action :authenticate_request, only: %i[create update]
-      before_action :authorize_user, only: %i[create update]
-      before_action :set_slide, only: :update
+      before_action :authenticate_request, only: %i[create update destroy]
+      before_action :authorize_user, only: %i[create update destroy]
+      before_action :set_slide, only: %i[update destroy]
 
       def create
         @slide = Slide.new(slide_params)
@@ -24,6 +24,11 @@ module Api
         else
           render json: @slide.errors, status: :unprocessable_entity
         end
+      end
+
+      def destroy
+        @slide.destroy
+        head :no_content
       end
 
       private
