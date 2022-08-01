@@ -1,11 +1,105 @@
 ---
 openapi: 3.0.1
 info:
-  title: OT-260 API
+  title: API V1
   version: v1
-paths: {}
+paths:
+  "/api/v1/comments":
+    get:
+      summary: list comments
+      tags:
+      - Comments
+      security:
+      - Bearer: {}
+      parameters:
+      - name: Authorization
+        in: header
+        schema:
+          type: string
+      responses:
+        '200':
+          description: successful
+    post:
+      summary: create comment
+      tags:
+      - Comments
+      security:
+      - Bearer: {}
+      parameters:
+      - name: Authorization
+        in: header
+        schema:
+          type: string
+      responses:
+        '200':
+          description: successful
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                body:
+                  type: string
+                user_id:
+                  type: integer
+                news_id:
+                  type: integer
+              required:
+              - body
+  "/api/v1/comments/{id}":
+    parameters:
+    - name: id
+      in: path
+      description: comment id
+      required: true
+      schema:
+        type: integer
+    put:
+      summary: update comment
+      tags:
+      - Comments
+      security:
+      - Bearer: {}
+      parameters:
+      - name: Authorization
+        in: header
+        schema:
+          type: string
+      responses:
+        '200':
+          description: successful
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                body:
+                  type: string
+                user_id:
+                  type: integer
+                news_id:
+                  type: integer
+              required:
+              - body
+    delete:
+      summary: delete comment
+      tags:
+      - Comments
+      security:
+      - Bearer: {}
+      parameters:
+      - name: Authorization
+        in: header
+        schema:
+          type: string
+      responses:
+        '200':
+          description: successful
 servers:
 - url: http://{defaultHost}
   variables:
     defaultHost:
-      default: 127.0.0.1:3000/api/v1/
+      default: localhost:3000/
+
