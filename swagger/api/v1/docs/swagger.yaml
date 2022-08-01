@@ -3,9 +3,113 @@ openapi: 3.0.1
 info:
   title: OT-260 API
   version: v1
-paths: {}
+paths:
+  "/api/v1/members":
+    get:
+      summary: Get Members Pagination
+      tags:
+      - Members
+      security:
+      - Bearer: {}
+      parameters:
+      - name: Authorization
+        in: header
+        schema:
+          type: string
+      responses:
+        '200':
+          description: ok
+    post:
+      summary: Create Member
+      tags:
+      - Members
+      security:
+      - Bearer: {}
+      parameters:
+      - name: Authorization
+        in: header
+        schema:
+          type: string
+      responses:
+        '201':
+          description: member created
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                description:
+                  type: string
+                facebook_url:
+                  type: string
+                instagram_url:
+                  type: string
+                linkedin_url:
+                  type: string
+                name:
+                  type: string
+                image:
+                  type: string
+              required:
+              - name
+  "/api/v1/members/{id}":
+    put:
+      summary: Update Member
+      tags:
+      - Members
+      security:
+      - Bearer: {}
+      parameters:
+      - name: Authorization
+        in: header
+        schema:
+          type: string
+      responses:
+        '200':
+          description: member updated
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                description:
+                  type: string
+                facebook_url:
+                  type: string
+                instagram_url:
+                  type: string
+                linkedin_url:
+                  type: string
+                name:
+                  type: string
+                image:
+                  type: string
+              required:
+              - name
+    delete:
+      summary: Delete Member
+      tags:
+      - Members
+      security:
+      - Bearer: {}
+      parameters:
+      - name: Authorization
+        in: header
+        schema:
+          type: string
+      responses:
+        '200':
+          description: member deleted
 servers:
 - url: http://{defaultHost}
   variables:
     defaultHost:
-      default: 127.0.0.1:3000/api/v1/
+      default: 127.0.0.1:3000/
+securityDefinitions:
+  Bearer:
+    description: "..."
+    type: apiKey
+    name: Authorization
+    in: header
