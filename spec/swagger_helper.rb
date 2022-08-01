@@ -15,16 +15,16 @@ RSpec.configure do |config|
   # document below. You can override this behavior by adding a swagger_doc tag to the
   # the root example_group in your specs, e.g. describe '...', swagger_doc: 'v2/swagger.json'
   config.swagger_docs = {
-    'v1/swagger.yaml' => {
+    '/api/v1/docs/swagger.yaml' => {
       openapi: '3.0.1',
       info: {
-        title: 'API V1',
+        title: 'OT-260 API',
         version: 'v1'
       },
       paths: {},
       servers: [
         {
-          url: 'https://{defaultHost}',
+          url: 'http://{defaultHost}',
           variables: {
             defaultHost: {
               default: '127.0.0.1:3000/'
@@ -32,6 +32,16 @@ RSpec.configure do |config|
           }
         }
       ]
+      # components: {
+      #   securitySchemes: {
+      #     bearer_auth: {
+      #       type: :http,
+      #       scheme: :bearer,
+      #       name: 'Authorization',
+      #       in: :header
+      #     }
+      #   }
+      # }
     }
   }
 

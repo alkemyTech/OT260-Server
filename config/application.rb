@@ -25,12 +25,12 @@ module OT260Server
     config.load_defaults 6.1
 
     # Set spanish as a default language
-    config.i18n.default_locale = :es
+    config.i18n.default_locale = :en
 
     # Configuration for the application, engines, and railties goes here.
     #
     # These settings can be overridden in specific environments using the files
-    # in config/environments, which are processed later.
+    # in config/environments  , which are processed later.
     #
     config.time_zone = "Buenos Aires"
     # config.eager_load_paths << Rails.root.join("extras")

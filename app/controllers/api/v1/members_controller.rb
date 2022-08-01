@@ -15,7 +15,7 @@ module Api
       end
 
       def create
-        if category_params[:name].to_i.to_s == '0'
+        if member_params[:name].to_i.to_s == '0'
           @member = Member.new(member_params)
           if @member.save
             render json: MemberSerializer.new(@member).serializable_hash, status: :created
@@ -28,10 +28,14 @@ module Api
       end
 
       def update
-        if @member.update(member_params)
-          render json: MemberSerializer.new(@member).serializable_hash, status: :ok
+        if member_params[:name].to_i.to_s == '0'
+          if @member.update(member_params)
+            render json: MemberSerializer.new(@member).serializable_hash, status: :ok
+          else
+            render json: @member.errors, status: :unprocessable_entity
+          end
         else
-          render json: @member.errors, status: :unprocessable_entity
+          render json: { error: 'Name parameter is not a Sting' }, status: :unprocessable_entity
         end
       end
 

@@ -45,3 +45,11 @@ Style/Documentation:
 Style/GuardClause:
   Exclude:
     - 'app/controllers/api/v1/testimonials_controller.rb'
+
+MultipleExpectations:
+  Exclude:
+    - spec/**/*
+
+ExampleLength:
+  Exclude:
+    - spec/**/*

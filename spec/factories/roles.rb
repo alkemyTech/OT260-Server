@@ -12,7 +12,7 @@
 #
 FactoryBot.define do
   factory :role do
-    name { 'MyString' }
-    description { 'MyString' }
+    name { 'administrator' }
+    description { 'Somos mas admin user' }
   end
 end
