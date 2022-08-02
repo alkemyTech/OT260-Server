@@ -1,9 +1,10 @@
+# frozen_string_literal: true
+
 # == Schema Information
 #
 # Table name: slides
 #
 #  id              :bigint           not null, primary key
-#  image_url       :string
 #  order           :integer
 #  text            :string
 #  created_at      :datetime         not null
@@ -20,6 +21,9 @@
 #
 class SlideSerializer
   include JSONAPI::Serializer
-  attributes :image_url, :text, :order
-  belongs_to :organizations
+  attributes :text, :order
+  belongs_to :organization
+  attribute :image do |slide|
+    slide.image.service_url
+  end
 end

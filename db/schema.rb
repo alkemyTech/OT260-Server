@@ -10,9 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-
-ActiveRecord::Schema.define(version: 2022_07_22_202117) do
-
+ActiveRecord::Schema.define(version: 2022_07_31_041822) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -63,14 +61,25 @@ ActiveRecord::Schema.define(version: 2022_07_22_202117) do
     t.index ["discarded_at"], name: "index_categories_on_discarded_at"
   end
 
-  create_table "contacts", force: :cascade do |t|
-    t.string "name"
-    t.integer "phone"
-    t.string "email"
-    t.string "message"
-    t.string "deletedAt"
+  create_table "comments", force: :cascade do |t|
+    t.text "body", null: false
+    t.bigint "user_id", null: false
+    t.bigint "news_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "contacts", force: :cascade do |t|
+    t.string "name", null: false
+    t.string "phone"
+    t.string "email", null: false
+    t.text "message"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.datetime "discarded_at"
+    t.bigint "user_id", null: false
+    t.index ["discarded_at"], name: "index_contacts_on_discarded_at"
+    t.index ["user_id"], name: "index_contacts_on_user_id"
   end
 
   create_table "members", force: :cascade do |t|
@@ -108,6 +117,9 @@ ActiveRecord::Schema.define(version: 2022_07_22_202117) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.datetime "discarded_at"
+    t.string "facebook_url"
+    t.string "instagram_url"
+    t.string "linkedin_url"
     t.index ["discarded_at"], name: "index_organizations_on_discarded_at"
   end
 
@@ -119,7 +131,6 @@ ActiveRecord::Schema.define(version: 2022_07_22_202117) do
   end
 
   create_table "slides", force: :cascade do |t|
-    t.string "image_url"
     t.string "text"
     t.integer "order"
     t.bigint "organization_id", null: false
@@ -156,6 +167,7 @@ ActiveRecord::Schema.define(version: 2022_07_22_202117) do
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
   add_foreign_key "comments", "news"
   add_foreign_key "comments", "users"
+  add_foreign_key "contacts", "users"
   add_foreign_key "news", "categories"
   add_foreign_key "slides", "organizations"
   add_foreign_key "users", "roles"

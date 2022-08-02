@@ -30,4 +30,15 @@
 # available at https://guides.rubyonrails.org/i18n.html.
 
 en:
-  hello: "Hello world"
+  activity_1:
+    name: 'School Support for Elementary level'
+    content: 'The school support space is the heart of the educational area. The workshops are held from Monday to Thursday from 10 a.m. to 12 p.m. and from 2 p.m. to 4 p.m. in the counter shift. On Saturdays, the workshop is also held for boys and girls who attend school double shift. We have a special space for 1st graders 2 times a week as they need special attention! Currently, 150 boys and girls between the ages of 6 and 15 are enrolled in this program. This workshop is designed to help students with the material they bring from school, we also have a teacher who gives them language and math classes with our own planning that we put together in Manos to level the children and that they go with more tools to the school.'
+  activity_2:
+    name: 'High School Level School Support'
+    content: 'Just as in elementary this workshop is the heart of the high school area. Workshops are held from Monday to Friday from 10 a.m. to 12 p.m. and from 4 p.m. to 6 p.m. in the counter shift. Currently, 50 teenagers between the ages of 13 and 20 are enrolled in the workshop. Here the young people present themselves with the material they bring from school and a teacher from the institution and a group of volunteers receive them to help them study or do their homework. This space is also used by young people as a meeting point and relationship between them and the institution.'
+  activity_3:
+    name: 'Tutorships'
+    content: 'It is a program aimed at young people from the third year of high school, whose objective is to guarantee their permanence in school and build a life project that gives meaning to school. The objective of this proposal is to achieve the school integration of children and young people from the neighborhood by promoting the appropriate socio-educational and emotional support, developing the necessary indispensable resources through the articulation of our interventions with the schools that house them, with the families of the students and with the corresponding municipal, provincial and national authorities.'
+  welcome_emailer_mailer:
+    send_welcome_email:
+      subject: "Bienvenido a Somos Mas!"

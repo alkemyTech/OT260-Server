@@ -6,9 +6,16 @@ module Api
       before_action :set_news, only: %i[show update destroy]
       before_action :authenticate_request, only: %i[show create update destroy]
       before_action :authorize_user, only: %i[show create update destroy]
+      after_action { pagy_headers_merge(@pagy) if @pagy }
+      include Pagy::Backend
+
+      def index
+        @pagy, @news = pagy(Category.kept)
+        render json: NewsSerializer.new(@news).serializable_hash, status: :ok
+      end
 
       def show
-        render json: NewsSerializer.new(@news).serializable_hash
+        render json: NewsSerializer.new(@news).serializable_hash, status: :ok
       end
 
       def create
@@ -22,7 +29,7 @@ module Api
 
       def update
         @news.update(news_params)
-        render json: NewsSerializer.new(@news).serializable_hash
+        render json: NewsSerializer.new(@news).serializable_hash, status: :ok
       end
 
       def destroy

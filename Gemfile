@@ -14,10 +14,12 @@ gem 'discard', '~> 1.2', '>= 1.2.1'
 gem 'dotenv-rails', '~> 2.7', '>= 2.7.6'
 gem 'jsonapi-serializer', '~> 2.2'
 gem 'jwt', '~> 2.3'
+gem 'pagy', '~> 5.10.1'
 gem 'pg', '~> 1.1'
 gem 'puma', '~> 5.0'
 gem 'rack-cors', '~> 1.1', '>= 1.1.1'
 gem 'rswag', '~> 2.5', '>= 2.5.1'
+gem 'sendgrid-ruby', '~> 6.6', '>= 6.6.2'
 
 group :development, :test do
   gem 'factory_bot_rails', '~> 5.1', '>= 5.1.1'

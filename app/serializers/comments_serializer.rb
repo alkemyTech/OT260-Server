@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-class CategoriesSerializer
+class CommentsSerializer
   include JSONAPI::Serializer
-  attributes :name, :description
+  attributes :body
 end

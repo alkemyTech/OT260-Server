@@ -17,7 +17,11 @@ AllCops:
     - testing/vendor/**/*
 
 Layout/LineLength:
-  Max: 100
+  Max: 105
+
+Metrics/AbcSize:
+  Exclude:
+    - 'app/controllers/api/v1/slides_controller.rb'
 
 Metrics/BlockLength:
   Exclude:
@@ -37,3 +41,7 @@ Lint/AmbiguousBlockAssociation:
 
 Style/Documentation:
   Enabled: false
+
+Style/GuardClause:
+  Exclude:
+    - 'app/controllers/api/v1/testimonials_controller.rb'
