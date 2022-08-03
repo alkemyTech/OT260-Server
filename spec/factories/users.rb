@@ -10,7 +10,6 @@
 #  first_name      :string           not null
 #  last_name       :string           not null
 #  password_digest :string           not null
-#  photo           :string
 #  created_at      :datetime         not null
 #  updated_at      :datetime         not null
 #  role_id         :bigint           not null
