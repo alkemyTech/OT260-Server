@@ -10,7 +10,6 @@
 #  first_name      :string           not null
 #  last_name       :string           not null
 #  password_digest :string           not null
-#  photo           :string
 #  created_at      :datetime         not null
 #  updated_at      :datetime         not null
 #  role_id         :bigint           not null
@@ -27,5 +26,9 @@
 #
 class UserSerializer
   include JSONAPI::Serializer
-  attributes :first_name, :last_name, :email, :photo
+
+  attributes :first_name, :last_name, :email
+  attributes :image do |user|
+    user.image.service_url if user.image.attached?
+  end
 end

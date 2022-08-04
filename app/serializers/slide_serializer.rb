@@ -21,9 +21,11 @@
 #
 class SlideSerializer
   include JSONAPI::Serializer
+
   attributes :text, :order
-  belongs_to :organization
-  attribute :image do |slide|
-    slide.image.service_url
+  attributes :image do |slide|
+    slide.image.service_url if slide.image.attached?
   end
+
+  belongs_to :organization
 end

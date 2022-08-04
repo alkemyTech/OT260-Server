@@ -19,6 +19,7 @@ class Category < ApplicationRecord
   include Discard::Model
 
   has_one_attached :image
+
   has_many :news, dependent: :nullify
 
   validates :name, presence: true
