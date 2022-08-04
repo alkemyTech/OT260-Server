@@ -66,3 +66,22 @@ Activity.create!([
 ])
 
 puts 'Activities created!!!'
+
+Category.destroy_all
+
+puts 'Creating categories...'
+
+Category.create!(
+  [
+    { name: 'Arts', description: 'description' },
+    { name: 'Entertainment', description: 'description' },
+    { name: 'Environment', description: 'description' },
+    { name: 'Fundraiser', description: 'description' },
+    { name: 'Event', description: 'description' }
+
+  ]
+)
+
+puts 'Categories created:'
+
+Category.all.each { |category| puts "*#{category.name}" }
