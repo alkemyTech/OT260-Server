@@ -14,6 +14,9 @@ module Api
                                                   image
                                                   phone
                                                   address
+                                                  facebook_url
+                                                  instagram_url
+                                                  linkedin_url
                                                 ] })
                                            .serializable_hash, status: :ok
       end
