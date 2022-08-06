@@ -1,7 +1,7 @@
 ---
 openapi: 3.0.1
 info:
-  title: OT-260 API
+  title: API V1
   version: v1
   description: Alkemy OT-260 Ruby API Documentation.
 paths:
@@ -428,7 +428,7 @@ paths:
         '200':
           description: deleted successfully
 servers:
-- url: http://{defaultHost}
+- url: https://{defaultHost}
   variables:
     defaultHost:
       default: 127.0.0.1:3000/
