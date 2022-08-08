@@ -20,10 +20,10 @@
 #
 FactoryBot.define do
   factory :member do
-    name { 'MyString' }
-    facebook_url { 'MyString' }
-    instagram_url { 'MyString' }
-    linkedin_url { 'MyString' }
-    description { 'MyString' }
+    name { Faker::Name.first_name }
+    facebook_url { Faker::Internet.url(host: 'facebook.com') }
+    instagram_url { Faker::Internet.url(host: 'instagram.com') }
+    linkedin_url { Faker::Internet.url(host: 'linkedin.com') }
+    description { Faker::Lorem.paragraph }
   end
 end
