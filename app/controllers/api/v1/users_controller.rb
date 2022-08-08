@@ -24,7 +24,7 @@ module Api
         @user.role = Role.find(params[:user][:role_id])
         if @user.save
           token = JsonWebToken.encode(user_id: @user.id)
-          WelcomeMailer.send_welcome_email(@user).deliver
+          Sendeable.welcome_notification_email(@user, 'Bienvenido a Somos Más')
           render json: {
             user: UserSerializer.new(@user).serializable_hash,
             token: token
@@ -66,7 +66,7 @@ module Api
       end
 
       def user_params
-        params.require(:user).permit(:first_name, :last_name, :email, :password, :photo)
+        params.require(:user).permit(:first_name, :last_name, :email, :password, :image)
       end
 
       def render_error

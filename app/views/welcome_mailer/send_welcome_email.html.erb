@@ -267,7 +267,7 @@
                             <td style="width:412px;">
 
                               <img height="auto"
-                                src="https://empresas.somosmas.org/wp-content/uploads/sites/15/2020/06/logo-somosmas.svg"
+                                src="https://cohorte-julio-8972766c.s3.amazonaws.com/r5rd4aq16d2scb9m3gydda0rg8os?response-content-disposition=inline%3B%20filename%3D%22somos_mas_logo.jpeg%22%3B%20filename%2A%3DUTF-8%27%27somos_mas_logo.jpeg&response-content-type=image%2Fjpeg&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIAS2JWQJCDDKORQMU5%2F20220810%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Date=20220810T040410Z&X-Amz-Expires=300&X-Amz-SignedHeaders=host&X-Amz-Signature=6fed5395d8098eb247390fcafad644d67e66433c2416054b9bd651bd7a7cb528"
                                 style="border:0;display:block;outline:none;text-decoration:none;height:auto;width:100%;font-size:13px;"
                                 width="312">
 
@@ -335,13 +335,14 @@
                         style="font-family:Ubuntu, Helvetica, Arial, sans-serif;font-size:12px;line-height:1.5;text-align:left;color:#000000;">
                         <hr>
                           <div
-                            style="font-family:Ubuntu, Helvetica, Arial, sans-serif;font-size:11px;line-height:1.5;text-align:left;color:#000000;">
+                            style="font-family:Ubuntu, Helvetica, Arial, sans-serif;font-size:11px;line-height:1.5;text-align:left;color:#000000;">  
+                            <% org = Organization.find_by(name: 'Somos Más')%>
                             <p style="text-align: center;">No dudes en contactarnos:</p>
                             <br>
-                            <p style="text-align: center;"><i class="bi bi-instagram"></i>  Somos M&aacute;s</p>
-                            <p style="text-align: center;"><i class="bi bi-facebook"></i>  Somos_M&aacute;s</p>
-                            <p style="text-align: center;"><i class="bi bi-telephone-fill"></i>  1160112988</p>
-                            <p style="text-align: center;"><i class="bi bi-envelope"></i>  somosfundacionmas@gmail.com</p>
+                            <p style="text-align: center;"><i class="bi bi-instagram"></i>  <%= org.instagram_url %></p>
+                            <p style="text-align: center;"><i class="bi bi-facebook"></i>  <%= org.facebook_url %></p>
+                            <p style="text-align: center;"><i class="bi bi-telephone-fill"></i>  <%= org.phone %></p>
+                            <p style="text-align: center;"><i class="bi bi-envelope"></i>  <%= org.email %></p>
                           </div>
                         </p>
                         <hr>

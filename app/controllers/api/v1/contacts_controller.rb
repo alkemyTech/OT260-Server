@@ -14,6 +14,7 @@ module Api
         @contact = Contact.new(contact_params)
         @contact.user = @current_user
         if @contact.save
+          Sendeable.contact_notification_email(@contact, 'Gracias por Registrarse en Somos Más')
           render json: ContactSerializer.new(@contact).serializable_hash, status: :created
         else
           render_error
