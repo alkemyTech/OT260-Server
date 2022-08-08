@@ -18,6 +18,8 @@ module Api
         @testimonial = Testimonial.new(testimonial_params)
         if @testimonial.save
           render json: TestimonialSerializer.new(@testimonial).serializable_hash, status: :created
+        else 
+          render json: @testimonial.errors, status: :unprocessable_entity
         end
       end
 
