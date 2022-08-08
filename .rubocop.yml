@@ -73,3 +73,7 @@ RSpec/VariableName:
 NestedGroups:
   Exclude:
       - spec/**/*
+
+RSpec/EmptyExampleGroup:
+  Exclude:
+  - spec/integration/categories_spec.rb

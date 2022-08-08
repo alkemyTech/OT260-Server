@@ -17,7 +17,7 @@ module Api
       end
 
       def show
-        render json: CategoriesSerializer.new(@categories).serializable_hash, status: :ok
+        render json: CategorySerializer.new(@category).serializable_hash, status: :ok
       end
 
       def create
@@ -34,8 +34,11 @@ module Api
       end
 
       def update
-        @category.update(category_params)
-        render json: CategorySerializer.new(@category).serializable_hash, status: :ok
+        if @category.update(category_params)
+          render json: CategorySerializer.new(@category).serializable_hash, status: :ok
+        else
+          render json: { error: 'Name parameter is not a Sting' }, status: :unprocessable_entity
+        end
       end
 
       def destroy
