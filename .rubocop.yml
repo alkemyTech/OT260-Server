@@ -33,7 +33,7 @@ Metrics/MethodLength:
 
 Lint/DuplicateBranch:
   Exclude:
-    - app/controllers/concerns/authenticable.rb 
+    - app/controllers/concerns/authenticable.rb
 
 Lint/AmbiguousBlockAssociation:
   Exclude:
@@ -45,3 +45,11 @@ Style/Documentation:
 Style/GuardClause:
   Exclude:
     - 'app/controllers/api/v1/testimonials_controller.rb'
+
+MultipleExpectations:
+  Exclude:
+    - spec/**/*
+
+MultipleMemoizedHelpers:
+  Exclude:
+    - spec/**/*

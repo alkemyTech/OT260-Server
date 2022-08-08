@@ -10,7 +10,7 @@ module Api
       def create
         @activity = Activity.new(activity_params)
         if @activity.save
-          render json: ActivitySerializer.new(@activity).serializable_hash.to_json, status: :ok
+          render json: ActivitySerializer.new(@activity).serializable_hash.to_json, status: :created
         else
           render json: @activity.errors, status: :unprocessable_entity
         end
