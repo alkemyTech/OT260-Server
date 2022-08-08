@@ -9,7 +9,7 @@ Rails.application.routes.draw do
       post 'auth/register', to: 'users#create'
 
       resources :categories, only: %i[index create show update destroy]
-      resources :comments, only: %i[index create update]
+      resources :comments, only: %i[index create update destroy]
       resources :members, only: %i[index create update destroy]
       resources :news, only: %i[index show create update destroy]
       resources :activities, only: %i[create update]
@@ -17,12 +17,11 @@ Rails.application.routes.draw do
         get 'public', on: :member
       end
 
-      resources :users, only: %i[index update]
+      resources :users, only: %i[index create update]
 
 
       resources :slides, only: %i[index show create update destroy]
       resources :testimonials, only: %i[index create update destroy]
-      resources :users, only: %i[index update destroy]
 
     end
   end

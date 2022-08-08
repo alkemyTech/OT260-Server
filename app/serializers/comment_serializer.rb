@@ -21,13 +21,9 @@
 #  fk_rails_...  (news_id => news.id)
 #  fk_rails_...  (user_id => users.id)
 #
-class Comment < ApplicationRecord
-  include Discard::Model
-
-  belongs_to :user, optional: true
-  belongs_to :news, optional: true
-
-  validates :news_id, presence: true
-  validates :user_id, presence: true
-  validates :body, presence: true
+class CommentSerializer
+  include JSONAPI::Serializer
+  attributes :body
+  belongs_to :news
+  belongs_to :user
 end

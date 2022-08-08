@@ -27,13 +27,13 @@ class NewsSerializer
   include JSONAPI::Serializer
   attributes :content, :name, :image
 
-  attribute :image do |news|
-    if news.image.attached?
-      Rails.application
-           .routes
-           .url_helpers.rails_blob_path(news.image, only_path: true)
-    end
-  end
+  #  attribute :image do |news|
+  #    if news.image.attached?
+  #      Rails.application
+  #           .routes
+  #           .url_helpers.rails_blob_path(news.image, only_path: true)
+  #    end
+  #  end
 
   belongs_to :category
 end

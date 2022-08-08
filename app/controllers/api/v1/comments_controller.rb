@@ -3,22 +3,22 @@
 module Api
   module V1
     class CommentsController < ApplicationController
-      before_action :authenticate_request, only: %i[index create update]
-      before_action :set_comment, only: %i[update]
+      before_action :authenticate_request, only: %i[index create update destroy]
+      before_action :set_comment, only: %i[update destroy]
+      before_action :authorize_user, only: %i[create update destroy]
 
       def index
         @comment = Comment.order('created_at DESC')
-        render json: CommentsSerializer.new(@comment,
-                                            fields: { comments: :body })
-                                       .serializable_hash, status: :ok
+        render json: CommentSerializer.new(@comment,
+                                           fields: { comment: :body })
+                                      .serializable_hash, status: :ok
       end
 
       def create
         @comment = Comment.new(comment_params)
-        @comment.user = @current_user
-        @comment.news = @current_user.news.find(params[:news_id])
+        @comment.user_id = @current_user.id
         if @comment.save
-          render json: CommentsSerializer.new(@comment).serializable_hash, status: :created
+          render json: CommentSerializer.new(@comment).serializable_hash, status: :created
         else
           render_error
         end
@@ -27,7 +27,16 @@ module Api
       def update
         if ownership?
           @comment = Comment.update(comment_params)
-          render json: CommentsSerializer.new(@comment).serializable_hash
+          render json: CommentSerializer.new(@comment).serializable_hash
+        else
+          render json: @comment.errors, status: :unprocessable_entity
+        end
+      end
+
+      def destroy
+        if ownership?
+          @comment.discard
+          head :no_content
         else
           render json: { error: 'unauthorized' }, status: :unauthorized
         end
@@ -40,12 +49,18 @@ module Api
       end
 
       def comment_params
-        params.require(:comment).permit(:body)
+        params.require(:comment).permit(:body, :news_id)
       end
 
       def render_error
         render json: { errors: @comment.errors.full_messages },
                status: :unprocessable_entity
+      end
+
+      def render_unauthorized
+        render status: :unauthorized, json: {
+          errors: [I18n.t('errors.controllers.unauthorized')]
+        }
       end
     end
   end

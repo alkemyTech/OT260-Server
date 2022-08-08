@@ -25,7 +25,7 @@ module OT260Server
     config.load_defaults 6.1
 
     # Set spanish as a default language
-    config.i18n.default_locale = :es
+    config.i18n.default_locale = :en
 
     # Configuration for the application, engines, and railties goes here.
     #
