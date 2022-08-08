@@ -13,7 +13,7 @@ Rails.application.routes.draw do
       resources :members, only: %i[index create update destroy]
       resources :news, only: %i[index show create update destroy]
       resources :activities, only: %i[create update]
-      resources :organizations, only: [] do
+      resources :organizations, only: %i[update] do
         get 'public', on: :member
       end
       resources :slides, only: %i[index show create update destroy]
