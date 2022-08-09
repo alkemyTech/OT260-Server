@@ -11,7 +11,9 @@ Rails.application.routes.draw do
       resources :comments, only: %i[index create update]
       resources :contacts, only: %i[index create]
       resources :members, only: %i[index create update destroy]
-      resources :news, only: %i[index show create update destroy]
+      resources :news, only: %i[index show create update destroy] do
+        resources :comments, only: %i[index]
+      end
       resources :activities, only: %i[create update]
       resources :organizations, only: %i[update] do
         get 'public', on: :member
