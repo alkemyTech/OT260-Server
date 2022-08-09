@@ -11,7 +11,7 @@ module Api
 
       def index
         @pagy, @members = pagy(Member.kept)
-        render json: MembersSerializer.new(@members).serializable_hash, status: :ok
+        render json: MemberSerializer.new(@members).serializable_hash, status: :ok
       end
 
       def create

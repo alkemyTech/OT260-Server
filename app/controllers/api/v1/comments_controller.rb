@@ -7,18 +7,18 @@ module Api
       before_action :set_comment, only: %i[update]
 
       def index
-        @comment = Comment.order('created_at DESC')
-        render json: CommentsSerializer.new(@comment,
-                                            fields: { comments: :body })
-                                       .serializable_hash, status: :ok
+        @comments = Comment.order('created_at DESC')
+        render json: CommentSerializer.new(@comments,
+                                           fields: { comments: :body })
+                                      .serializable_hash, status: :ok
       end
 
       def create
         @comment = Comment.new(comment_params)
         @comment.user = @current_user
-        @comment.news = @current_user.news.find(params[:news_id])
+        @comment.news = News.find(params[:news_id])
         if @comment.save
-          render json: CommentsSerializer.new(@comment).serializable_hash, status: :created
+          render json: CommentSerializer.new(@comment).serializable_hash, status: :created
         else
           render_error
         end
@@ -27,7 +27,16 @@ module Api
       def update
         if ownership?
           @comment = Comment.update(comment_params)
-          render json: CommentsSerializer.new(@comment).serializable_hash
+          render json: CommentSerializer.new(@comment).serializable_hash, status: :ok
+        else
+          render json: { error: 'unauthorized' }, status: :unauthorized
+        end
+      end
+
+      def destroy
+        if ownership?
+          @comment.discard
+          head :no_content
         else
           render json: { error: 'unauthorized' }, status: :unauthorized
         end

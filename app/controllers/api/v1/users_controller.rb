@@ -12,7 +12,7 @@ module Api
 
       def index
         @users = User.kept
-        render json: UserSerializer.new(@users).serializable_hash.to_json
+        render json: UserSerializer.new(@users).serializable_hash, status: :ok
       end
 
       def me
