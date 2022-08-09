@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_07_31_041822) do
+ActiveRecord::Schema.define(version: 2022_08_03_185124) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -97,7 +97,6 @@ ActiveRecord::Schema.define(version: 2022_07_31_041822) do
   create_table "news", force: :cascade do |t|
     t.string "name", null: false
     t.text "content", null: false
-    t.string "image", null: false
     t.bigint "category_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
@@ -153,7 +152,6 @@ ActiveRecord::Schema.define(version: 2022_07_31_041822) do
     t.string "last_name", null: false
     t.string "email", null: false
     t.string "password_digest", null: false
-    t.string "photo"
     t.bigint "role_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false

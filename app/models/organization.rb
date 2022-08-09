@@ -26,6 +26,7 @@ class Organization < ApplicationRecord
   include Discard::Model
 
   has_one_attached :image
+
   has_many :slides, dependent: :destroy
 
   validates :name, :email, :welcome_text, presence: true

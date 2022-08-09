@@ -7,7 +7,6 @@
 #  id           :bigint           not null, primary key
 #  content      :text             not null
 #  discarded_at :datetime
-#  image        :string           not null
 #  name         :string           not null
 #  news_type    :string           default("news")
 #  created_at   :datetime         not null
@@ -25,14 +24,10 @@
 #
 class NewsSerializer
   include JSONAPI::Serializer
-  attributes :content, :name, :image
 
-  attribute :image do |news|
-    if news.image.attached?
-      Rails.application
-           .routes
-           .url_helpers.rails_blob_path(news.image, only_path: true)
-    end
+  attributes :content, :name
+  attributes :image do |news|
+    news.image.service_url if news.image.attached?
   end
 
   belongs_to :category

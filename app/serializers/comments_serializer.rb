@@ -2,5 +2,6 @@
 
 class CommentsSerializer
   include JSONAPI::Serializer
+
   attributes :body
 end

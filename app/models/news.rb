@@ -7,7 +7,6 @@
 #  id           :bigint           not null, primary key
 #  content      :text             not null
 #  discarded_at :datetime
-#  image        :string           not null
 #  name         :string           not null
 #  news_type    :string           default("news")
 #  created_at   :datetime         not null
@@ -25,6 +24,8 @@
 #
 class News < ApplicationRecord
   include Discard::Model
+
+  has_one_attached :image
 
   belongs_to :category
   has_many :comments, dependent: :destroy

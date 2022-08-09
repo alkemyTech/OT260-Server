@@ -17,8 +17,7 @@
 #
 FactoryBot.define do
   factory :activity do
-    name { 'MyString' }
-    content { 'MyText' }
-    discarded_at { '2022-07-21 13:28:47' }
+    name { "Activity #{rand(10)}" }
+    content { Faker::Lorem.paragraphs(number: 1)[0] }
   end
 end

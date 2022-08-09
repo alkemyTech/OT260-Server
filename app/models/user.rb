@@ -22,7 +22,6 @@
 #  first_name      :string           not null
 #  last_name       :string           not null
 #  password_digest :string           not null
-#  photo           :string
 #  created_at      :datetime         not null
 #  updated_at      :datetime         not null
 #  role_id         :bigint           not null
@@ -40,7 +39,9 @@
 #
 class User < ApplicationRecord
   include Discard::Model
+
   has_secure_password
+  has_one_attached :image
 
   belongs_to :role
   has_many :comments, dependent: :destroy

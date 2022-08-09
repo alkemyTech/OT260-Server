@@ -7,7 +7,6 @@
 #  id           :bigint           not null, primary key
 #  content      :text             not null
 #  discarded_at :datetime
-#  image        :string           not null
 #  name         :string           not null
 #  news_type    :string           default("news")
 #  created_at   :datetime         not null

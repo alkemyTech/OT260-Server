@@ -24,5 +24,10 @@
 #
 class OrganizationSerializer
   include JSONAPI::Serializer
+
   attributes :name, :address, :email, :phone, :welcome_text, :about_us_text
+  attributes :facebook_url, :linkedin_url, :instagram_url
+  attributes :image do |organization|
+    organization.image.service_url if organization.image.attached?
+  end
 end

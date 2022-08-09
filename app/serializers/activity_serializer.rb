@@ -17,9 +17,9 @@
 #
 class ActivitySerializer
   include JSONAPI::Serializer
-  attributes :name, :content
 
-  attributes :image_url do |activity|
-    activity.image.service_url
+  attributes :name, :content
+  attributes :image do |activity|
+    activity.image.service_url if activity.image.attached?
   end
 end
