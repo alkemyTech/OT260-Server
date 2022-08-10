@@ -3,9 +3,48 @@ openapi: 3.0.1
 info:
   title: OT-260 API
   version: v1
-paths: {}
+  description: Alkemy OT-260 Ruby API Documentation.
+paths:
+  "/api/v1/organizations/{id}/public":
+    get:
+      summary: shows an organization
+      tags:
+      - Organizations
+      security:
+      - Bearer: {}
+      parameters:
+      - name: Authorization
+        in: header
+        schema:
+          type: string
+      - name: id
+        in: path
+        description: id
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: successful
+  "/api/v1/organizations/{id}":
+    parameters:
+    - name: Authorization
+      in: header
+      schema:
+        type: string
+    put:
+      summary: update person
+      responses:
+        '200':
+          description: successful
 servers:
 - url: http://{defaultHost}
   variables:
     defaultHost:
-      default: 127.0.0.1:3000/api/v1/
+      default: 127.0.0.1:3000/
+components:
+  securitySchemes:
+    Bearer:
+      type: http
+      scheme: bearer
+      name: Authorization
