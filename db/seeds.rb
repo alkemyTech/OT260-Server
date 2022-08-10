@@ -1,7 +1,28 @@
 require 'faker'
 
+puts 'Creating organization...'
+
+Organization.destroy_all
+
+Organization.create!(
+  name: 'Somos Más',
+  address: 'La amistad 123',
+  phone: 444_333_555,
+  email: 'ong.alkemy.mailer@gmail.com',
+  welcome_text: 'Bienvenidos a Somos Más',
+  about_us_text: 'Somos Más es una organización sin fines de lucro que busca un futuro mejor para la sociedad',
+  facebook_url: 'https://www.facebook.com/somosmas',
+  instagram_url: '@somosmasok',
+  linkedin_url: 'https://www.linkedin.com/in/somos-mas-85b310224/'
+)
+
+puts 'Organization created:'
+
+Organization.all.each { |organization| puts "* #{organization.name}" }
+
 puts 'Creating roles...'
 
+User.destroy_all
 Role.destroy_all
 
 Role.create!(
@@ -18,7 +39,6 @@ Role.all.each { |role| puts "* #{role.name}" }
 
 puts 'Creating users...'
 
-User.destroy_all
 
 User.create!(first_name: 'admin',
             last_name: 'admin',
