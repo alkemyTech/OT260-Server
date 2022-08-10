@@ -7,10 +7,16 @@ module Api
       before_action :set_comment, only: %i[update]
 
       def index
-        @comments = Comment.order('created_at DESC')
-        render json: CommentSerializer.new(@comments,
-                                           fields: { comments: :body })
-                                      .serializable_hash, status: :ok
+        if params[:news_id]
+          @news = News.find(params[:news_id])
+          @comments = @news.comments
+          render json: CommentSerializer.new(@comments).serializable_hash
+        else
+          @comments = Comment.order('created_at DESC')
+          render json: CommentSerializer.new(@comments,
+                                             fields: { comments: :body })
+                                        .serializable_hash, status: :ok
+        end
       end
 
       def create
