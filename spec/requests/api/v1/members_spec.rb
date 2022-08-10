@@ -104,7 +104,7 @@ RSpec.describe 'Api::V1::Members', type: :request do
       expect do
         delete api_v1_member_path(member), headers: valid_headers, as: :json
       end.to change(Member, :discarded)
-      expect(response).to have_http_status(:no_content)
+      expect(response).to have_http_status(:ok)
     end
   end
 end

@@ -23,7 +23,7 @@ module Api
             render json: @member.errors, status: :unprocessable_entity
           end
         else
-          render json: { error: 'Name parameter is not a Sting' }, status: :unprocessable_entity
+          render json: { error: 'Name parameter is not a String' }, status: :unprocessable_entity
         end
       end
 
@@ -41,7 +41,7 @@ module Api
 
       def destroy
         @member.discard
-        head :no_content
+        head :ok
       end
 
       private
