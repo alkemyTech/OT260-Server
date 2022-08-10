@@ -3,10 +3,6 @@
 require 'rails_helper'
 
 RSpec.describe 'Api::V1::Members', type: :request do
-  before do
-    ENV['JWT_SECRET_KEY'] = 'secret_key'
-  end
-
   let(:login_user) do
     create(:user, password: 'password')
     post api_v1_auth_login_path,

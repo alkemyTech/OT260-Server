@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
 class ApplicationMailer < ActionMailer::Base
-  default from: 'ong.alkemy.mailer@gmail.com'
+  default from: ENV.fetch('EMAIL_DEFAULT')
   layout 'mailer'
 end
