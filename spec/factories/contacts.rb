@@ -25,10 +25,10 @@
 #
 FactoryBot.define do
   factory :contact do
-    name { 'MyString' }
-    phone { 'MyString' }
-    email { 'MyString' }
-    message { 'MyText' }
+    name { Faker::Name.first_name }
+    phone { Faker::PhoneNumber.phone_number_with_country_code }
+    email { Faker::Internet.email }
+    message { Faker::Lorem.sentence }
 
     association :user
   end
