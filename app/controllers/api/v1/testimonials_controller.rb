@@ -10,7 +10,7 @@ module Api
       include Pagy::Backend
 
       def index
-        @pagy, @testimonials = pagy(Category.kept)
+        @pagy, @testimonials = pagy(Testimonial.kept)
         render json: TestimonialSerializer.new(@testimonials).serializable_hash, status: :ok
       end
 
