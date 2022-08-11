@@ -53,3 +53,19 @@ MultipleExpectations:
 MultipleMemoizedHelpers:
   Exclude:
     - spec/**/*
+
+ScatteredSetup:
+  Exclude:
+      - spec/**/*
+
+EmptyExampleGroup:
+  Exclude:
+      - spec/**/*
+
+DescribeClass:
+  Exclude:
+      - spec/**/*
+
+RSpec/VariableName:
+  Exclude:
+      - spec/**/*

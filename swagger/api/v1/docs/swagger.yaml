@@ -3,9 +3,128 @@ openapi: 3.0.1
 info:
   title: OT-260 API
   version: v1
-paths: {}
+  description: Alkemy OT-260 Ruby API Documentation.
+paths:
+  "/api/v1/members":
+    get:
+      summary: Get All Members
+      tags:
+      - Members
+      security:
+      - Bearer: {}
+      parameters:
+      - name: Authorization
+        in: header
+        schema:
+          type: string
+      responses:
+        '200':
+          description: successful
+    post:
+      summary: Create Member
+      tags:
+      - Members
+      security:
+      - Bearer: {}
+      parameters:
+      - name: Authorization
+        in: header
+        schema:
+          type: string
+      responses:
+        '201':
+          description: created
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                facebook_url:
+                  type: string
+                  nullable: true
+                linkedin_url:
+                  type: string
+                  nullable: true
+                instagram_url:
+                  type: string
+                  nullable: true
+                description:
+                  type: string
+                  nullable: true
+              required:
+              - name
+  "/api/v1/members/{id}":
+    put:
+      summary: Update Member
+      tags:
+      - Members
+      security:
+      - Bearer: {}
+      parameters:
+      - name: Authorization
+        in: header
+        schema:
+          type: string
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: updated successfully
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                facebook_url:
+                  type: string
+                  nullable: true
+                linkedin_url:
+                  type: string
+                  nullable: true
+                instagram_url:
+                  type: string
+                  nullable: true
+                description:
+                  type: string
+                  nullable: true
+              required:
+              - name
+    delete:
+      summary: Delete Member
+      tags:
+      - Members
+      security:
+      - Bearer: {}
+      parameters:
+      - name: Authorization
+        in: header
+        schema:
+          type: string
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: deleted successfully
 servers:
 - url: http://{defaultHost}
   variables:
     defaultHost:
-      default: 127.0.0.1:3000/api/v1/
+      default: 127.0.0.1:3000/
+components:
+  securitySchemes:
+    Bearer:
+      type: http
+      scheme: bearer
+      name: Authorization
