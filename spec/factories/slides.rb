@@ -21,9 +21,10 @@
 #
 FactoryBot.define do
   factory :slide do
-    image_url { 'MyString' }
-    text { 'MyString' }
-    order { 0 }
-    organization { nil }
+    text { Faker::Lorem.paragraph(sentence_count: 1) }
+    order { Faker::Number.number(digits: 3) }
+    
+    
+    association :organization
   end
 end
