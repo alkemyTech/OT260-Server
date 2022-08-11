@@ -260,6 +260,79 @@ paths:
       responses:
         '200':
           description: deleted successfully
+  "/api/v1/organizations/{id}/public":
+    get:
+      summary: shows an organization
+      tags:
+      - Organizations
+      security:
+      - Bearer: {}
+      parameters:
+      - name: Authorization
+        in: header
+        schema:
+          type: string
+      - name: id
+        in: path
+        description: id
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: successful
+  "/api/v1/organizations/{id}":
+    put:
+      summary: updates an organization
+      tags:
+      - Organizations
+      security:
+      - Bearer: {}
+      parameters:
+      - name: Authorization
+        in: header
+        schema:
+          type: string
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: updated successfully
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                about_us_text:
+                  type: text
+                  nullable: true
+                address:
+                  type: string
+                  nullable: true
+                email:
+                  type: string
+                name:
+                  type: string
+                facebook_url:
+                  type: string
+                  nullable: true
+                linkedin_url:
+                  type: string
+                  nullable: true
+                instagram_url:
+                  type: string
+                  nullable: true
+                phone:
+                  type: integer
+                  nullable: true
+                welcome_text:
+                  type: text
+              required:
+              - name
 servers:
 - url: http://{defaultHost}
   variables:
