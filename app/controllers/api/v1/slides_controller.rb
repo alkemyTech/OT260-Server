@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Api
   module V1
     class SlidesController < ApplicationController
@@ -62,4 +64,5 @@ module Api
         render json: { errors: @slide.errors.full_messages }, status: :not_found
       end
     end
+  end
 end
