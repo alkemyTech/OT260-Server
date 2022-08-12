@@ -17,6 +17,7 @@ describe 'organization' do
 path '/api/v1/organizations/{id}/public' do
     get('shows an organization') do
       response(200, 'successful') do
+        let(:id) { '123' }
         tags 'Organizations'
         consumes 'application/json'
         security [Bearer: {}]
@@ -58,6 +59,7 @@ path '/api/v1/organizations/{id}/public' do
 
     put('updates an organization') do
         response(200, 'updated successfully') do
+          let(:id) { '123' }
           tags 'Organizations'
           consumes 'application/json'
           security [Bearer: {}]
