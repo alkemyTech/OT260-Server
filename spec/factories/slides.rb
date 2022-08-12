@@ -23,8 +23,7 @@ FactoryBot.define do
   factory :slide do
     text { Faker::Lorem.paragraph(sentence_count: 1) }
     order { Faker::Number.number(digits: 3) }
-    
-    
+
     association :organization
   end
 end

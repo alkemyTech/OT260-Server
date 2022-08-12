@@ -33,6 +33,5 @@ FactoryBot.define do
     facebook_url { Faker::Internet.url(host: 'facebook.com') }
     instagram_url { Faker::Internet.url(host: 'instagram.com') }
     linkedin_url { Faker::Internet.url(host: 'linkedin.com') }
-
   end
 end

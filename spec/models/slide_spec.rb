@@ -29,7 +29,7 @@ RSpec.describe Slide, type: :model do
   end
 
   describe 'Associations' do
-     it { is_expected.to belong_to(:organization) }
+    it { is_expected.to belong_to(:organization) }
   end
 
   describe 'Database' do
