@@ -14,10 +14,6 @@ describe 'Testimonials API' do
 
   let(:testimonial) { create(:testimonial) }
 
-  before do
-    ENV['JWT_SECRET_KEY'] = 'secret_key'
-  end
-
   path '/api/v1/testimonials' do
     get('Get All Testimonials') do
       response(200, 'successful') do

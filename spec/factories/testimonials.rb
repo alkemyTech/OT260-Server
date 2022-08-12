@@ -17,7 +17,7 @@
 #
 FactoryBot.define do
   factory :testimonial do
-    name { 'MyString' }
-    content { 'MyString' }
+    name { Faker::Name.first_name }
+    content { Faker::Lorem.paragraph }
   end
 end
