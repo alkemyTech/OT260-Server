@@ -4,17 +4,18 @@
 require 'swagger_helper'
 
 describe 'organization' do
-    let(:login_user) do
-        create(:user, password: 'password')
-        post api_v1_auth_login_path,
-             params: { user: { email: User.last.email, password: 'password' } }, as: :json
-        JSON.parse(response.body, symbolize_names: true)
-      end
-    
-      let(:Authorization) { login_user[:token] }
+  let(:login_user) do
+    create(:user, password: 'password')
+    post api_v1_auth_login_path,
+         params: { user: { email: User.last.email, password: 'password' } }, as: :json
+    JSON.parse(response.body, symbolize_names: true)
+  end
 
-      
-path '/api/v1/organizations/{id}/public' do
+  let(:Authorization) { login_user[:token] }
+
+  let(:organization) { create(:organization) }
+
+  path '/api/v1/organizations/{id}/public' do
     get('shows an organization') do
       response(200, 'successful') do
         let(:id) { '123' }
@@ -22,14 +23,13 @@ path '/api/v1/organizations/{id}/public' do
         consumes 'application/json'
         security [Bearer: {}]
         parameter name: :Authorization, in: :header, type: :string
-        parameter name: :id, in: :path, type: :string, description: 'id'
+        parameter name: :id, in: :path, type: :string
         schema type: :object,
                properties: {
                  organizations: {
                    type: :array,
                    items: {
                      properties: {
-                       id: { type: :integer },
                        about_us_text: { type: :text, nullable: true },
                        address: { type: :string, nullable: true },
                        email: { type: :string },
@@ -37,8 +37,8 @@ path '/api/v1/organizations/{id}/public' do
                        facebook_url: { type: :string, nullable: true },
                        linkedin_url: { type: :string, nullable: true },
                        instagram_url: { type: :string, nullable: true },
-                       phone: {type: :integer, nullable: true },
-                       welcome_text: {type: :text}
+                       phone: { type: :integer, nullable: true },
+                       welcome_text: { type: :text }
                      }
                    }
                  }
@@ -51,13 +51,13 @@ path '/api/v1/organizations/{id}/public' do
             }
           }
         end
+
         run_test!
       end
     end
 
-  path '/api/v1/organizations/{id}' do
-
-    put('updates an organization') do
+    path '/api/v1/organizations/{id}' do
+      put('updates an organization') do
         response(200, 'updated successfully') do
           let(:id) { '123' }
           tags 'Organizations'
@@ -66,21 +66,21 @@ path '/api/v1/organizations/{id}/public' do
           parameter name: :Authorization, in: :header, type: :string
           parameter name: :id, in: :path, type: :string
           parameter name: :organization, in: :body, schema: {
-          type: :object,
-                 properties: {
-                         about_us_text: { type: :text, nullable: true },
-                         address: { type: :string, nullable: true },
-                         email: { type: :string },
-                         name: { type: :string },
-                         facebook_url: { type: :string, nullable: true },
-                         linkedin_url: { type: :string, nullable: true },
-                         instagram_url: { type: :string, nullable: true },
-                         phone: {type: :integer, nullable: true },
-                         welcome_text: {type: :text}
-                       }
-                       }
-                 
-  
+            type: :object,
+            properties: {
+              about_us_text: { type: :text, nullable: true },
+              address: { type: :string, nullable: true },
+              email: { type: :string },
+              name: { type: :string },
+              facebook_url: { type: :string, nullable: true },
+              linkedin_url: { type: :string, nullable: true },
+              instagram_url: { type: :string, nullable: true },
+              phone: { type: :integer, nullable: true },
+              welcome_text: { type: :text }
+            },
+            required: %w[name email welcome_text]
+          }
+
           after do |example|
             example.metadata[:response][:content] = {
               'application/json' => {
@@ -88,6 +88,7 @@ path '/api/v1/organizations/{id}/public' do
               }
             }
           end
+
           run_test!
         end
       end

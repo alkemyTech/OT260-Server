@@ -35,8 +35,7 @@ module Api
       def set_organization
         @organization = Organization.kept.find(params[:id])
       rescue ActiveRecord::RecordNotFound
-        render json: { error: "Could not find organization with ID '#{params[:id]}'" },
-               status: :unprocessable_entity
+        render json: { error: "Could not find organization with ID '#{params[:id]}'" }
       end
 
       def organization_params
