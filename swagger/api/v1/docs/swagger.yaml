@@ -117,6 +117,149 @@ paths:
       responses:
         '200':
           description: deleted successfully
+  "/api/v1/users":
+    get:
+      summary: Get All Users
+      tags:
+      - Users
+      security:
+      - Bearer: {}
+      parameters:
+      - name: Authorization
+        in: header
+        schema:
+          type: string
+      responses:
+        '200':
+          description: successful
+  "/api/v1/auth/me":
+    get:
+      summary: Get My User
+      tags:
+      - Users
+      security:
+      - Bearer: {}
+      parameters:
+      - name: Authorization
+        in: header
+        schema:
+          type: string
+      responses:
+        '200':
+          description: successful
+  "/api/v1/auth/register":
+    post:
+      summary: Register As User
+      tags:
+      - Users
+      security:
+      - Bearer: {}
+      parameters: []
+      responses:
+        '201':
+          description: created
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                user:
+                  properties:
+                    email:
+                      type: string
+                    first_name:
+                      type: string
+                    last_name:
+                      type: string
+                    role_id:
+                      type: integer
+                    password:
+                      type: string
+              required:
+              - email
+              - first_name
+              - last_name
+  "/api/v1/auth/login":
+    post:
+      summary: Login As User
+      tags:
+      - Users
+      security:
+      - Bearer: {}
+      parameters: []
+      responses:
+        '200':
+          description: successful
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                user:
+                  properties:
+                    email:
+                      type: string
+                    password:
+                      type: string
+              required:
+              - email
+              - password
+  "/api/v1/users/{id}":
+    put:
+      summary: Update User
+      tags:
+      - Users
+      security:
+      - Bearer: {}
+      parameters:
+      - name: Authorization
+        in: header
+        schema:
+          type: string
+      responses:
+        '200':
+          description: updated successfully
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                user:
+                  properties:
+                    email:
+                      type: string
+                    first_name:
+                      type: string
+                    last_name:
+                      type: string
+                    password:
+                      type: string
+              required:
+              - email
+              - first_name
+              - last_name
+    delete:
+      summary: Delete User
+      tags:
+      - Users
+      security:
+      - Bearer: {}
+      parameters:
+      - name: Authorization
+        in: header
+        schema:
+          type: string
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: deleted successfully
 servers:
 - url: http://{defaultHost}
   variables:
