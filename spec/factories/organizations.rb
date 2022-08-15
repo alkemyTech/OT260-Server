@@ -24,11 +24,14 @@
 #
 FactoryBot.define do
   factory :organization do
-    name { 'MyString' }
-    address { 'MyString' }
-    phone { 1 }
-    email { 'MyString' }
-    welcome_text { 'MyText' }
-    about_us_text { 'MyText' }
+    name { Faker::Name.name }
+    address { Faker::Address.street_address }
+    phone { Faker::Number.number(digits: 8) }
+    email { Faker::Internet.email }
+    welcome_text { Faker::Lorem.paragraph(sentence_count: 2) }
+    about_us_text { Faker::Lorem.paragraph(sentence_count: 2) }
+    facebook_url { Faker::Internet.url(host: 'facebook.com') }
+    instagram_url { Faker::Internet.url(host: 'instagram.com') }
+    linkedin_url { Faker::Internet.url(host: 'linkedin.com') }
   end
 end

@@ -26,12 +26,10 @@ module Api
 
       def create
         @slide = Slide.new(slide_params)
-        @slide.order = Slide.all.pluck(:order).max + 1 if @slide.order.nil?
-        @slide.organization = Organization.find(params[:organization_id])
         if @slide.save
-          render json: SlideSerializer.new(@slide).serializable_hash, status: :ok
+          render json: SlideSerializer.new(@slide).serializable_hash, status: :created
         else
-          render json: @slide.errors, status: :unprocessable_entity
+          render json: { errors: @slide.errors.full_messages }, status: :unprocessable_entity
         end
       end
 
@@ -39,7 +37,7 @@ module Api
         if @slide.update(slide_params)
           render json: SlideSerializer.new(@slide).serializable_hash.to_json, status: :ok
         else
-          render json: @slide.errors, status: :unprocessable_entity
+          render json: { errors: @slide.errors.full_messages }, status: :unprocessable_entity
         end
       end
 
@@ -53,11 +51,11 @@ module Api
       def set_slide
         @slide = Slide.find(params[:id])
       rescue ActiveRecord::RecordNotFound
-        render json: { error: "Could not find member with ID '#{params[:id]}'" }
+        render json: { error: "Could not find slide with ID '#{params[:id]}'" }
       end
 
       def slide_params
-        params.require(:slide).permit(:text, :order, :image)
+        params.require(:slide).permit(:text, :order, :image, :organization_id)
       end
 
       def render_error
