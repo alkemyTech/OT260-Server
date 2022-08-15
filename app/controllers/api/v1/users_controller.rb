@@ -8,7 +8,7 @@ module Api
       before_action :set_user, only: :destroy
       before_action :set_user_for_login, only: :login
       before_action :authenticate_request, only: %i[index me update destroy]
-      before_action :authorize_user, only: %i[index me]
+      before_action :authorize_user, only: %i[index me destroy]
 
       def index
         @users = User.kept
@@ -46,19 +46,24 @@ module Api
       end
 
       def update
-        @current_user.update(user_params)
-        render json: UserSerializer.new(@user).serializable_hash.to_json
+        if @current_user.update(user_params)
+          render json: UserSerializer.new(@user).serializable_hash, status: :ok
+        else
+          render json: @current_user.errors, status: :unprocessable_entity
+        end
       end
 
       def destroy
         @user.discard
-        head :no_content
+        head :ok
       end
 
       private
 
       def set_user
         @user = User.kept.find(params[:id])
+      rescue ActiveRecord::RecordNotFound
+        render json: { error: "Could not find member with ID '#{params[:id]}'" }
       end
 
       def set_user_for_login
