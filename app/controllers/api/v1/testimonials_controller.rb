@@ -10,7 +10,7 @@ module Api
       include Pagy::Backend
 
       def index
-        @pagy, @testimonials = pagy(Category.kept)
+        @pagy, @testimonials = pagy(Testimonial.kept)
         render json: TestimonialSerializer.new(@testimonials).serializable_hash, status: :ok
       end
 
@@ -38,6 +38,8 @@ module Api
 
       def set_testimonial
         @testimonial = Testimonial.kept.find(params[:id])
+      rescue ActiveRecord::RecordNotFound
+        render json: { error: "Could not find testimonial with ID '#{params[:id]}'" }
       end
 
       def testimonial_params
