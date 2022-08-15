@@ -69,3 +69,7 @@ DescribeClass:
 RSpec/VariableName:
   Exclude:
       - spec/**/*
+
+NestedGroups:
+  Exclude:
+      - spec/**/*

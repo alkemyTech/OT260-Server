@@ -6,7 +6,7 @@ RSpec.describe 'Api::V1::Slides', type: :request do
     create(:user, password: 'password')
     post api_v1_auth_login_url,
          params: { user: { email: User.last.email, password: 'password' } }, as: :json
-    response_has = JSON.parse(response.body, symbolize_names: true)
+    JSON.parse(response.body, symbolize_names: true)
   end
   let(:valid_headers) { { Authorization: login_user[:token] } }
 
@@ -38,14 +38,15 @@ RSpec.describe 'Api::V1::Slides', type: :request do
       it 'creates a new slide' do
         expect do
           post api_v1_slides_url,
-               params: { slides: valid_attributes, organization_id: organization.id }, headers: valid_headers, as: :json
-        end
-          .to change(Slide, :count).by(1)
+               params: { slides: valid_attributes,
+                         organization_id: organization.id }, headers: valid_headers, as: :json
+        end.to change(Slide, :count).by(1)
       end
 
       it 'renders a JSON response with the new slide' do
         post api_v1_slides_url,
-             params: { slides: valid_attributes, organization_id: organization.id }, headers: valid_headers, as: :json
+             params: { slides: valid_attributes,
+                       organization_id: organization.id }, headers: valid_headers, as: :json
         expect(response).to have_http_status(:created)
         expect(response.content_type).to match(a_string_including('application/json'))
       end
