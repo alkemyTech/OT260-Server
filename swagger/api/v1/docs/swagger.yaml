@@ -117,6 +117,72 @@ paths:
       responses:
         '200':
           description: deleted successfully
+  "/api/v1/news/{id}/details":
+    parameters:
+    - name: id
+      in: path
+      description: id
+      required: true
+      schema:
+        type: string
+    get:
+      summary: details news
+      tags:
+      - News
+      responses:
+        '401':
+          description: unauthorized
+        '404':
+          description: not found
+        '200':
+          description: news found
+  "/api/v1/news":
+    post:
+      summary: create news
+      tags:
+      - News
+      responses:
+        '201':
+          description: news created
+  "/api/v1/news/{id}":
+    parameters:
+    - name: id
+      in: path
+      description: id
+      required: true
+      schema:
+        type: string
+    put:
+      summary: update news
+      tags:
+      - News
+      responses:
+        '401':
+          description: unauthorized
+        '404':
+          description: not found
+        '200':
+          description: successful
+    delete:
+      summary: delete news
+      parameters:
+      - name: id
+        in: path
+        description: id
+        required: true
+        schema:
+          type: string
+      tags:
+      - News
+      responses:
+        '401':
+          description: unauthorized
+        '200':
+          description: successful
+        '404':
+          description: not found
+        '422':
+          description: unprocessable_entity        
 servers:
 - url: http://{defaultHost}
   variables:

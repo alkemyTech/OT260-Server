@@ -28,6 +28,21 @@ FactoryBot.define do
     image { 'MyString' }
     name { 'MyString' }
     news_type { 'news' }
-    category { nil }
+    category { create(:category) }
+
+    trait :good do
+      name { Faker::Lorem.sentence }
+      content { Faker::Lorem.paragraph }
+      image { Faker::Lorem.sentence }
+    end
+
+    trait :bad do
+      name { nil }
+      content { nil }
+      image { nil }
+    end
+
+    factory :good_news, traits: [:good]
+    factory :bad_news, traits: [:bad]
   end
 end
