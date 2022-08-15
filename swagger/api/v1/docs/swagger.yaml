@@ -5,6 +5,119 @@ info:
   version: v1
   description: Alkemy OT-260 Ruby API Documentation.
 paths:
+  "/api/v1/categories":
+    get:
+      summary: Get All Categories
+      tags:
+      - Categories
+      security:
+      - Bearer: {}
+      parameters:
+      - name: Authorization
+        in: header
+        schema:
+          type: string
+      responses:
+        '200':
+          description: successful
+    post:
+      summary: Create Category
+      tags:
+      - Categories
+      security:
+      - Bearer: {}
+      parameters:
+      - name: Authorization
+        in: header
+        schema:
+          type: string
+      responses:
+        '201':
+          description: created
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                description:
+                  type: string
+                  nullable: true
+              required:
+              - name
+  "/api/v1/categories/{id}":
+    get:
+      summary: Show Category
+      tags:
+      - Categories
+      security:
+      - Bearer: {}
+      parameters:
+      - name: Authorization
+        in: header
+        schema:
+          type: string
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: got category
+    patch:
+      summary: Update Category
+      tags:
+      - Categories
+      security:
+      - Bearer: {}
+      parameters:
+      - name: Authorization
+        in: header
+        schema:
+          type: string
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: updated successfully
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                description:
+                  type: string
+                  nullable: true
+              required:
+              - name
+    delete:
+      summary: Delete Category
+      tags:
+      - Categories
+      security:
+      - Bearer: {}
+      parameters:
+      - name: Authorization
+        in: header
+        schema:
+          type: string
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: deleted successfully
   "/api/v1/members":
     get:
       summary: Get All Members
@@ -431,7 +544,7 @@ servers:
 - url: http://{defaultHost}
   variables:
     defaultHost:
-      default: 127.0.0.1:3000/
+      default: localhost:3000
 components:
   securitySchemes:
     Bearer:

@@ -30,4 +30,7 @@ class OrganizationSerializer
   attributes :image do |organization|
     organization.image.service_url if organization.image.attached?
   end
+  has_many :slides do |organization|
+    organization.slides.order(order: :asc)
+  end
 end

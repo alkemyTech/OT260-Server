@@ -22,4 +22,5 @@ class CategorySerializer
   attributes :image do |category|
     category.image.service_url if category.image.attached?
   end
+  has_many :news
 end

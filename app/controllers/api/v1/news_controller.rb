@@ -10,7 +10,7 @@ module Api
       include Pagy::Backend
 
       def index
-        @pagy, @news = pagy(Category.kept)
+        @pagy, @news = pagy(News.kept)
         render json: NewsSerializer.new(@news).serializable_hash, status: :ok
       end
 

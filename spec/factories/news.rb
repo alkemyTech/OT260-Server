@@ -28,6 +28,7 @@ FactoryBot.define do
     image { 'MyString' }
     name { 'MyString' }
     news_type { 'news' }
-    category { nil }
+    
+    association :category
   end
 end

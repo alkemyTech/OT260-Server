@@ -18,6 +18,7 @@ module Api
                                                   facebook_url
                                                   instagram_url
                                                   linkedin_url
+                                                  slides
                                                 ] })
                                            .serializable_hash, status: :ok
       end
