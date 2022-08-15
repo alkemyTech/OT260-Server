@@ -5,4 +5,5 @@ class ApplicationController < ActionController::API
   include Authenticable
   include Uploadable
   include Sendeable
+  include Protectable
 end
