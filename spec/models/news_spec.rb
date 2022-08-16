@@ -25,5 +25,28 @@
 require 'rails_helper'
 
 RSpec.describe News, type: :model do
-  pending "add some examples to (or delete) #{__FILE__}"
+  subject { create(:news) }
+
+  describe 'Factory' do
+    it { is_expected.to be_valid }
+  end
+
+  describe 'Validations' do
+    it { is_expected.to belong_to(:category) }
+  end
+
+  describe 'Database' do
+    it { is_expected.to have_db_column(:id).of_type(:integer).with_options(null: false) }
+    it { is_expected.to have_db_column(:content).of_type(:text).with_options(null: false) }
+    it { is_expected.to have_db_column(:discarded_at).of_type(:datetime) }
+    it { is_expected.to have_db_column(:name).of_type(:string).with_options(null: false) }
+    it { is_expected.to have_db_column(:news_type).of_type(:string).with_options(default: 'news') }
+    it { is_expected.to have_db_column(:created_at).of_type(:datetime).with_options(null: false) }
+    it { is_expected.to have_db_column(:updated_at).of_type(:datetime).with_options(null: false) }
+  end
+
+  describe 'Indexes' do
+    it { is_expected.to have_db_index(:discarded_at) }
+    it { is_expected.to have_db_index(:category_id) }
+  end
 end

@@ -29,6 +29,7 @@ FactoryBot.define do
     phone { 'MyString' }
     email { 'MyString' }
     message { 'MyText' }
-    discarded_at { '' }
+
+    association :user
   end
 end
