@@ -25,10 +25,17 @@
 FactoryBot.define do
   factory :news do
     content { 'MyString' }
-    image { 'MyString' }
     name { 'MyString' }
     news_type { 'news' }
     
     association :category
+
+    after(:build) do |user|
+      user.image.attach(
+        io: File.open(Rails.root.join('spec/factories_files/test.png')),
+        filename: 'user_icon.jpeg',
+        content_type: 'image/jpeg'
+      )
+    end
   end
 end
