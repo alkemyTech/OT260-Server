@@ -34,6 +34,12 @@ RSpec.describe Contact, type: :model do
 
   describe 'Validations' do
     it { is_expected.to belong_to(:user) }
+    it { is_expected.to validate_presence_of(:email) }
+    it { is_expected.to validate_presence_of(:name) }
+  end
+
+  describe 'Associations' do
+    it { is_expected.to belong_to(:user) }
   end
 
   describe 'Database' do

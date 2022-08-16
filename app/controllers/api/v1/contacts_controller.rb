@@ -6,8 +6,8 @@ module Api
       before_action :authenticate_request, only: %i[index create]
 
       def index
-        @contact = @current_user.contacts.all
-        render json: ContactSerializer.new(@contact).serializable_hash, status: :ok
+        @contacts = @current_user.contacts.all
+        render json: ContactSerializer.new(@contacts).serializable_hash, status: :ok
       end
 
       def create
@@ -17,7 +17,7 @@ module Api
           Sendeable.contact_notification_email(@contact, 'Gracias por Registrarse en Somos Más')
           render json: ContactSerializer.new(@contact).serializable_hash, status: :created
         else
-          render_error
+          render json: @contact.errors, status: :unprocessable_entity
         end
       end
 
@@ -25,11 +25,6 @@ module Api
 
       def contact_params
         params.require(:contact).permit(:email, :name, :message, :phone)
-      end
-
-      def render_error
-        render json: { errors: @contact.errors.full_messages },
-               status: :unprocessable_entity
       end
     end
   end
