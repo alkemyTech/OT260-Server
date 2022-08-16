@@ -19,7 +19,7 @@ paths:
           type: string
       responses:
         '200':
-          description: successful
+          description: succesful
     post:
       summary: Create Category
       tags:
@@ -66,8 +66,8 @@ paths:
           type: string
       responses:
         '200':
-          description: got category
-    patch:
+          description: succesful
+    put:
       summary: Update Category
       tags:
       - Categories
@@ -230,6 +230,174 @@ paths:
       responses:
         '200':
           description: deleted successfully
+  "/api/v1/organizations/{id}/public":
+    get:
+      summary: shows an organization
+      tags:
+      - Organizations
+      security:
+      - Bearer: {}
+      parameters:
+      - name: Authorization
+        in: header
+        schema:
+          type: string
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: successful
+  "/api/v1/organizations/{id}":
+    put:
+      summary: updates an organization
+      tags:
+      - Organizations
+      security:
+      - Bearer: {}
+      parameters:
+      - name: Authorization
+        in: header
+        schema:
+          type: string
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: updated successfully
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                about_us_text:
+                  type: text
+                  nullable: true
+                address:
+                  type: string
+                  nullable: true
+                email:
+                  type: string
+                name:
+                  type: string
+                facebook_url:
+                  type: string
+                  nullable: true
+                linkedin_url:
+                  type: string
+                  nullable: true
+                instagram_url:
+                  type: string
+                  nullable: true
+                phone:
+                  type: integer
+                  nullable: true
+                welcome_text:
+                  type: text
+              required:
+              - name
+              - email
+              - welcome_text
+  "/api/v1/testimonials":
+    get:
+      summary: Get All Testimonials
+      tags:
+      - Testimonials
+      security:
+      - Bearer: {}
+      parameters:
+      - name: Authorization
+        in: header
+        schema:
+          type: string
+      responses:
+        '200':
+          description: successful
+    post:
+      summary: Create Testimonials
+      tags:
+      - Testimonials
+      security:
+      - Bearer: {}
+      parameters:
+      - name: Authorization
+        in: header
+        schema:
+          type: string
+      responses:
+        '201':
+          description: created
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                content:
+                  type: string
+                  nullable: true
+              required:
+              - name
+  "/api/v1/testimonials/{id}":
+    patch:
+      summary: Update Testimonial
+      tags:
+      - Testimonials
+      security:
+      - Bearer: {}
+      parameters:
+      - name: Authorization
+        in: header
+        schema:
+          type: string
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: updated successfully
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                content:
+                  type: string
+                  nullable: true
+              required:
+              - name
+    delete:
+      summary: Delete Testimonial
+      tags:
+      - Testimonials
+      security:
+      - Bearer: {}
+      parameters:
+      - name: Authorization
+        in: header
+        schema:
+          type: string
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: deleted successfully
   "/api/v1/users":
     get:
       summary: Get All Users
@@ -358,173 +526,6 @@ paths:
       summary: Delete User
       tags:
       - Users
-      security:
-      - Bearer: {}
-      parameters:
-      - name: Authorization
-        in: header
-        schema:
-          type: string
-      - name: id
-        in: path
-        required: true
-        schema:
-          type: string
-      responses:
-        '200':
-          description: deleted successfully
-  "/api/v1/organizations/{id}/public":
-    get:
-      summary: shows an organization
-      tags:
-      - Organizations
-      security:
-      - Bearer: {}
-      parameters:
-      - name: Authorization
-        in: header
-        schema:
-          type: string
-      - name: id
-        in: path
-        description: id
-        required: true
-        schema:
-          type: string
-      responses:
-        '200':
-          description: successful
-  "/api/v1/organizations/{id}":
-    put:
-      summary: updates an organization
-      tags:
-      - Organizations
-      security:
-      - Bearer: {}
-      parameters:
-      - name: Authorization
-        in: header
-        schema:
-          type: string
-      - name: id
-        in: path
-        required: true
-        schema:
-          type: string
-      responses:
-        '200':
-          description: updated successfully
-      requestBody:
-        content:
-          application/json:
-            schema:
-              type: object
-              properties:
-                about_us_text:
-                  type: text
-                  nullable: true
-                address:
-                  type: string
-                  nullable: true
-                email:
-                  type: string
-                name:
-                  type: string
-                facebook_url:
-                  type: string
-                  nullable: true
-                linkedin_url:
-                  type: string
-                  nullable: true
-                instagram_url:
-                  type: string
-                  nullable: true
-                phone:
-                  type: integer
-                  nullable: true
-                welcome_text:
-                  type: text
-              required:
-              - name
-               "/api/v1/testimonials":
-    get:
-      summary: Get All Testimonials
-      tags:
-      - Testimonials
-      security:
-      - Bearer: {}
-      parameters:
-      - name: Authorization
-        in: header
-        schema:
-          type: string
-      responses:
-        '200':
-          description: successful
-    post:
-      summary: Create Testimonials
-      tags:
-      - Testimonials
-      security:
-      - Bearer: {}
-      parameters:
-      - name: Authorization
-        in: header
-        schema:
-          type: string
-      responses:
-        '201':
-          description: created
-      requestBody:
-        content:
-          application/json:
-            schema:
-              type: object
-              properties:
-                name:
-                  type: string
-                content:
-                  type: string
-                  nullable: true
-              required:
-              - name
-  "/api/v1/testimonials/{id}":
-    patch:
-      summary: Update Testimonial
-      tags:
-      - Testimonials
-      security:
-      - Bearer: {}
-      parameters:
-      - name: Authorization
-        in: header
-        schema:
-          type: string
-      - name: id
-        in: path
-        required: true
-        schema:
-          type: string
-      responses:
-        '200':
-          description: updated successfully
-      requestBody:
-        content:
-          application/json:
-            schema:
-              type: object
-              properties:
-                name:
-                  type: string
-                content:
-                  type: string
-                  nullable: true
-              required:
-              - name
-    delete:
-      summary: Delete Testimonial
-      tags:
-      - Testimonials
       security:
       - Bearer: {}
       parameters:

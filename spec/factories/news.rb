@@ -27,7 +27,7 @@ FactoryBot.define do
     content { 'MyString' }
     name { 'MyString' }
     news_type { 'news' }
-    
+
     association :category
 
     after(:build) do |user|
