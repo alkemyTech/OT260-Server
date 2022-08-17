@@ -19,5 +19,13 @@ FactoryBot.define do
   factory :testimonial do
     name { Faker::Name.first_name }
     content { Faker::Lorem.paragraph }
+
+    after(:build) do |testimonial|
+      testimonial.image.attach(
+        io: File.open(Rails.root.join('spec/factories_files/dummy_image.png')),
+        filename: 'dummy_image.png',
+        content_type: 'image/png'
+      )
+    end
   end
 end

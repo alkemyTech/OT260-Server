@@ -6,4 +6,5 @@ class ApplicationController < ActionController::API
   include Uploadable
   include Sendeable
   include Protectable
+  include ActiveStorage::SetCurrent
 end
