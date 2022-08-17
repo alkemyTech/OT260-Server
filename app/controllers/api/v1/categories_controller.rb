@@ -11,9 +11,8 @@ module Api
 
       def index
         @pagy, @categories = pagy(Category.kept)
-        @cat_serializer = CategorySerializer.new(@categories,
-                                                 { fields: { category: [:name] } })
-        render json: @cat_serializer.serializable_hash, status: :ok
+        render json: CategorySerializer.new(@categories, { fields:
+          { category: [:name] } }).serializable_hash, status: :ok
       end
 
       def show
@@ -51,8 +50,7 @@ module Api
       def set_category
         @category = Category.kept.find(params[:id])
       rescue ActiveRecord::RecordNotFound
-        render json: { error: "Could not find category with ID '#{params[:id]}'" },
-               status: :unprocessable_entity
+        render json: { error: "Could not find category with ID '#{params[:id]}'" }
       end
 
       def category_params
