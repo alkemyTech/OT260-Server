@@ -4,7 +4,7 @@
 
 first_name: admin 
 last_name: admin
-email: admin@mail.com
+email: admin@somosmas.org
 password: password-admin
 
 ## Regular users 

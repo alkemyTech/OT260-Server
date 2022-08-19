@@ -12,7 +12,7 @@ Rails.application.routes.draw do
       resources :contacts, only: %i[index create]
       resources :members, only: %i[index create update destroy]
       resources :news, only: %i[index show create update destroy] do
-        resources :comments, only: %i[index]
+        resources :comments, only: %i[index create update destroy]
       end
       resources :activities, only: %i[create update]
       resources :organizations, only: %i[update] do
@@ -21,6 +21,7 @@ Rails.application.routes.draw do
       resources :slides, only: %i[index show create update destroy]
       resources :testimonials, only: %i[index create update destroy]
       resources :users, only: %i[index update destroy]
+      
     end
   end
 end

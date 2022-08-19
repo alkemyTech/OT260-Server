@@ -15,6 +15,8 @@
 #
 #  index_categories_on_discarded_at  (discarded_at)
 #
+require 'faker'
+
 FactoryBot.define do
   factory :category do
     name { "Category #{rand(1..20)}" }

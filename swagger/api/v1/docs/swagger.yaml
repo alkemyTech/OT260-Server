@@ -713,6 +713,102 @@ paths:
       responses:
         '200':
           description: deleted successfully
+  "/api/v1/comments":
+    get:
+      summary: Get All Comments
+      tags:
+      - Comments
+      security:
+      - Bearer: {}
+      parameters:
+      - name: Authorization
+        in: header
+        schema:
+          type: string
+      responses:
+        '200':
+          description: successful
+    post:
+      summary: Create Comment
+      tags:
+      - Comments
+      security:
+      - Bearer: {}
+      parameters:
+      - name: Authorization
+        in: header
+        schema:
+          type: string
+      responses:
+        '201':
+          description: created
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                body:
+                  type: string
+                  example: body-comment
+                news_id:
+                  type: integer
+                  example: 1
+                user_id:
+                  type: integer
+                  example: 1
+              required:
+              - body
+  "/api/v1/comments/{id}":
+    put:
+      summary: Update Comment
+      tags:
+      - Comments
+      security:
+      - Bearer: {}
+      parameters:
+      - name: Authorization
+        in: header
+        schema:
+          type: string
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: updated successfully
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                body:
+                  type: string
+                  example: body-comment
+              required:
+              - body
+    delete:
+      summary: Delete Comment
+      tags:
+      - Comments
+      security:
+      - Bearer: {}
+      parameters:
+      - name: Authorization
+        in: header
+        schema:
+          type: string
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: deleted successfully
 servers:
 - url: http://{defaultHost}
   variables:
