@@ -179,6 +179,54 @@ paths:
       responses:
         '200':
           description: deleted successfully
+  "/api/v1/contacts":
+    get:
+      summary: Get All Contacts
+      tags:
+      - Contacts
+      security:
+      - Bearer: {}
+      parameters:
+      - name: Authorization
+        in: header
+        schema:
+          type: string
+      responses:
+        '200':
+          description: successful
+    post:
+      summary: Create Contact
+      tags:
+      - Contacts
+      security:
+      - Bearer: {}
+      parameters:
+      - name: Authorization
+        in: header
+        schema:
+          type: string
+      responses:
+        '201':
+          description: created
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                email:
+                  type: string
+                phone:
+                  type: string
+                  nullable: true
+                message:
+                  type: string
+                  nullable: true
+              required:
+              - name
+              - email
   "/api/v1/members":
     get:
       summary: Get All Members

@@ -3,9 +3,8 @@
 require 'rails_helper'
 
 RSpec.describe 'Api::V1::Testimonials', type: :request do
-
   let(:login_user) do
-    create(:user, email: "test@mail.com", password: 'password')
+    create(:user, email: 'test@mail.com', password: 'password')
     post api_v1_auth_login_path,
          params: { user: { email: 'test@mail.com', password: 'password' } }, as: :json
     JSON.parse(response.body, symbolize_names: true)
@@ -16,7 +15,7 @@ RSpec.describe 'Api::V1::Testimonials', type: :request do
   let(:invalid_attributes) { build(:testimonial, name: '') }
 
   describe 'GET /index' do
-    let(:testimonials) { create_list(:testimonial, 3) } 
+    let(:testimonials) { create_list(:testimonial, 3) }
 
     it 'renders a successful response' do
       get api_v1_testimonials_url, headers: valid_headers, as: :json
@@ -35,19 +34,19 @@ RSpec.describe 'Api::V1::Testimonials', type: :request do
       it 'creates a new testimonial' do
         expect do
           post api_v1_testimonials_url,
-               params: {testimonial: valid_attributes}, headers: valid_headers, as: :json
+               params: { testimonial: valid_attributes }, headers: valid_headers, as: :json
         end.to change(Testimonial, :count).by(1)
       end
 
       it 'returns http status created' do
         post api_v1_testimonials_url,
-             params: { testimonial: valid_attributes}, headers: valid_headers, as: :json
+             params: { testimonial: valid_attributes }, headers: valid_headers, as: :json
         expect(response).to have_http_status(:created)
       end
 
       it 'returns a response of type JSON' do
         post api_v1_testimonials_url,
-             params: { testimonial: valid_attributes}, headers: valid_headers, as: :json
+             params: { testimonial: valid_attributes }, headers: valid_headers, as: :json
         expect(response.content_type).to match(a_string_including('application/json'))
       end
     end
@@ -117,6 +116,4 @@ RSpec.describe 'Api::V1::Testimonials', type: :request do
       expect(response).to have_http_status(:no_content)
     end
   end
-
-
 end
