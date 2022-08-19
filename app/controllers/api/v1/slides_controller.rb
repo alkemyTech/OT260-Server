@@ -43,7 +43,7 @@ module Api
 
       def destroy
         @slide.destroy
-        head :no_content
+        head :ok
       end
 
       private
