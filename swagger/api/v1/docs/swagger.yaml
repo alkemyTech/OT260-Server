@@ -304,6 +304,117 @@ paths:
               - name
               - email
               - welcome_text
+  "/api/v1/slides":
+    get:
+      summary: Get All Slides
+      tags:
+      - Slides
+      security:
+      - Bearer: {}
+      parameters:
+      - name: Authorization
+        in: header
+        schema:
+          type: string
+      responses:
+        '200':
+          description: successful
+    post:
+      summary: Create Slide
+      tags:
+      - Slides
+      security:
+      - Bearer: {}
+      parameters:
+      - name: Authorization
+        in: header
+        schema:
+          type: string
+      responses:
+        '201':
+          description: created
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                text:
+                  type: string
+                  nullable: true
+                order:
+                  type: integer
+                  nullable: true
+  "/api/v1/slides/{id}":
+    get:
+      summary: Show Slides
+      tags:
+      - Slides
+      security:
+      - Bearer: {}
+      parameters:
+      - name: Authorization
+        in: header
+        schema:
+          type: string
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: succesful
+    put:
+      summary: Update Slide
+      tags:
+      - Slides
+      security:
+      - Bearer: {}
+      parameters:
+      - name: Authorization
+        in: header
+        schema:
+          type: string
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: updated successfully
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                text:
+                  type: string
+                  nullable: true
+                order:
+                  type: integer
+                  nullable: true
+    delete:
+      summary: Delete Slide
+      tags:
+      - Slides
+      security:
+      - Bearer: {}
+      parameters:
+      - name: Authorization
+        in: header
+        schema:
+          type: string
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: deleted successfully
   "/api/v1/testimonials":
     get:
       summary: Get All Testimonials
