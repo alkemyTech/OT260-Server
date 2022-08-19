@@ -3,8 +3,10 @@
 module Api
   module V1
     class CommentsController < ApplicationController
-      before_action :authenticate_request, only: %i[index create update]
-      before_action :set_comment, only: %i[update]
+      before_action :authenticate_request, only: %i[index create update destroy]
+      before_action :authorize_user, only: %i[index]
+      before_action :ownership?, only: %i[update destroy]
+      before_action :set_comment, only: %i[update destroy]
 
       def index
         if params[:news_id]
@@ -31,21 +33,16 @@ module Api
       end
 
       def update
-        if ownership?
-          @comment = Comment.update(comment_params)
+        if @comment.update(comment_params)
           render json: CommentSerializer.new(@comment).serializable_hash, status: :ok
         else
-          render json: { error: 'unauthorized' }, status: :unauthorized
+          render_error
         end
       end
 
       def destroy
-        if ownership?
-          @comment.discard
-          head :no_content
-        else
-          render json: { error: 'unauthorized' }, status: :unauthorized
-        end
+        @comment.destroy
+        head :no_content
       end
 
       private
