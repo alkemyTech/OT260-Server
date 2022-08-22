@@ -48,7 +48,7 @@ module Api
       end
 
       def news_params
-        params.require(:news).permit(:content, :image, :name, :news_type)
+        params.require(:news).permit(:content, :name, :news_type, :category_id)
       end
     end
   end

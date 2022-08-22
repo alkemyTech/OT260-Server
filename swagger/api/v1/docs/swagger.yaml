@@ -63,9 +63,6 @@ paths:
                   type: string
                 content:
                   type: string
-              required:
-              - name
-              - content
   "/api/v1/categories":
     get:
       summary: Get All Categories
@@ -179,6 +176,102 @@ paths:
       responses:
         '200':
           description: deleted successfully
+  "/api/v1/comments":
+    get:
+      summary: Get All Comments
+      tags:
+      - Comments
+      security:
+      - Bearer: {}
+      parameters:
+      - name: Authorization
+        in: header
+        schema:
+          type: string
+      responses:
+        '200':
+          description: successful
+    post:
+      summary: Create Comment
+      tags:
+      - Comments
+      security:
+      - Bearer: {}
+      parameters:
+      - name: Authorization
+        in: header
+        schema:
+          type: string
+      responses:
+        '201':
+          description: created
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                body:
+                  type: string
+                  example: body-comment
+                news_id:
+                  type: integer
+                  example: 1
+                user_id:
+                  type: integer
+                  example: 1
+              required:
+              - body
+  "/api/v1/comments/{id}":
+    put:
+      summary: Update Comment
+      tags:
+      - Comments
+      security:
+      - Bearer: {}
+      parameters:
+      - name: Authorization
+        in: header
+        schema:
+          type: string
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: updated successfully
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                body:
+                  type: string
+                  example: body-comment
+              required:
+              - body
+    delete:
+      summary: Delete Comment
+      tags:
+      - Comments
+      security:
+      - Bearer: {}
+      parameters:
+      - name: Authorization
+        in: header
+        schema:
+          type: string
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '204':
+          description: deleted
   "/api/v1/contacts":
     get:
       summary: Get All Contacts
@@ -339,6 +432,125 @@ paths:
       responses:
         '200':
           description: deleted successfully
+  "/api/v1/news":
+    get:
+      summary: Get All News
+      tags:
+      - News
+      security:
+      - Bearer: {}
+      parameters:
+      - name: Authorization
+        in: header
+        schema:
+          type: string
+      responses:
+        '200':
+          description: succesful
+    post:
+      summary: Create News
+      tags:
+      - News
+      security:
+      - Bearer: {}
+      parameters:
+      - name: Authorization
+        in: header
+        schema:
+          type: string
+      responses:
+        '201':
+          description: created
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                content:
+                  type: text
+                name:
+                  type: string
+                news_type:
+                  type: string
+                category_id:
+                  type: integer
+              required:
+              - name
+  "/api/v1/news/{id}":
+    get:
+      summary: Show News
+      tags:
+      - News
+      security:
+      - Bearer: {}
+      parameters:
+      - name: Authorization
+        in: header
+        schema:
+          type: string
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: succesful
+    put:
+      summary: Update News
+      tags:
+      - News
+      security:
+      - Bearer: {}
+      parameters:
+      - name: Authorization
+        in: header
+        schema:
+          type: string
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: updated successfully
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                content:
+                  type: text
+                name:
+                  type: string
+                news_type:
+                  type: string
+                category_id:
+                  type: integer
+              required:
+              - name
+    delete:
+      summary: Delete News
+      tags:
+      - News
+      security:
+      - Bearer: {}
+      parameters:
+      - name: Authorization
+        in: header
+        schema:
+          type: string
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '204':
+          description: deleted
   "/api/v1/organizations/{id}/public":
     get:
       summary: shows an organization
@@ -746,102 +958,6 @@ paths:
       summary: Delete User
       tags:
       - Users
-      security:
-      - Bearer: {}
-      parameters:
-      - name: Authorization
-        in: header
-        schema:
-          type: string
-      - name: id
-        in: path
-        required: true
-        schema:
-          type: string
-      responses:
-        '200':
-          description: deleted successfully
-  "/api/v1/comments":
-    get:
-      summary: Get All Comments
-      tags:
-      - Comments
-      security:
-      - Bearer: {}
-      parameters:
-      - name: Authorization
-        in: header
-        schema:
-          type: string
-      responses:
-        '200':
-          description: successful
-    post:
-      summary: Create Comment
-      tags:
-      - Comments
-      security:
-      - Bearer: {}
-      parameters:
-      - name: Authorization
-        in: header
-        schema:
-          type: string
-      responses:
-        '201':
-          description: created
-      requestBody:
-        content:
-          application/json:
-            schema:
-              type: object
-              properties:
-                body:
-                  type: string
-                  example: body-comment
-                news_id:
-                  type: integer
-                  example: 1
-                user_id:
-                  type: integer
-                  example: 1
-              required:
-              - body
-  "/api/v1/comments/{id}":
-    put:
-      summary: Update Comment
-      tags:
-      - Comments
-      security:
-      - Bearer: {}
-      parameters:
-      - name: Authorization
-        in: header
-        schema:
-          type: string
-      - name: id
-        in: path
-        required: true
-        schema:
-          type: string
-      responses:
-        '200':
-          description: updated successfully
-      requestBody:
-        content:
-          application/json:
-            schema:
-              type: object
-              properties:
-                body:
-                  type: string
-                  example: body-comment
-              required:
-              - body
-    delete:
-      summary: Delete Comment
-      tags:
-      - Comments
       security:
       - Bearer: {}
       parameters:
