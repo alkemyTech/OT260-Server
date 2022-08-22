@@ -24,8 +24,8 @@
 #
 FactoryBot.define do
   factory :news do
-    content { 'MyString' }
-    name { 'MyString' }
+    content { Faker::Lorem.paragraphs }
+    name { Faker::Name.name }
     news_type { 'news' }
 
     association :category

@@ -21,10 +21,12 @@ module Api
       def create
         @news = News.new(news_params)
         @news.category = Category.find(params[:news][:category_id])
-        return unless @news.save
-
-        render json: NewsSerializer.new(@news)
-                                   .serializable_hash, status: :created
+        if @news.save
+          render json: NewsSerializer.new(@news)
+                                     .serializable_hash, status: :created
+        else
+          render json: { error: @news.errors.full_message }
+        end
       end
 
       def update

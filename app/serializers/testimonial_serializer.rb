@@ -20,6 +20,6 @@ class TestimonialSerializer
 
   attributes :name, :content
   attribute :image do |testimonial|
-    testimonial.image.service_url if testimonial.image.attached?
+    testimonial.image.url if testimonial.image.attached?
   end
 end
