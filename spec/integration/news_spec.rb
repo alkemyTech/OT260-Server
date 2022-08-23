@@ -2,7 +2,7 @@
 
 require 'swagger_helper'
 
-describe 'Comments API' do
+RSpec.describe 'Categories API' do
   let(:login_user) do
     create(:user, password: 'password')
     post api_v1_auth_login_path,
@@ -13,22 +13,24 @@ describe 'Comments API' do
   let(:Authorization) { login_user[:token] }
 
   let(:news) { create(:news) }
-  let(:comment) { create(:comment) }
 
-  path '/api/v1/comments' do
-    get('Get All Comments') do
-      response(200, 'successful') do
-        tags 'Comments'
+  path '/api/v1/news' do
+    get('Get All News') do
+      response(200, 'succesful') do
+        tags 'News'
         consumes 'application/json'
         security [Bearer: {}]
         parameter name: :Authorization, in: :header, type: :string
         schema type: :object,
                properties: {
-                 comments: {
+                 news: {
                    type: :array,
                    items: {
                      properties: {
-                       body: { type: :string }
+                       content: { type: :text },
+                       name: { type: :string },
+                       news_type: {type: :string},
+                       category_id: {type: :integer}
                      }
                    }
                  }
@@ -46,21 +48,23 @@ describe 'Comments API' do
       end
     end
 
-    post('Create Comment') do
+    post('Create News') do
       response(201, 'created') do
-        tags 'Comments'
+        tags 'News'
         consumes 'application/json'
         security [Bearer: {}]
         parameter name: :Authorization, in: :header, type: :string
-        parameter name: :comment, in: :body, schema: {
+        parameter name: :News, in: :body, schema: {
           type: :object,
           properties: {
-            body: { type: :string, example: 'body-comment' },
-            news_id: { type: :integer, example: 1 },
-            user_id: { type: :integer, example: 1 }
+            content: { type: :text },
+            name: { type: :string },
+            news_type: {type: :string},
+            category_id: {type: :integer}
           },
-          required: %w[body]
+          required: %w[name]
         }
+
         after do |example|
           example.metadata[:response][:content] = {
             'application/json' => {
@@ -74,21 +78,59 @@ describe 'Comments API' do
     end
   end
 
-  path '/api/v1/comments/{id}' do
-    put('Update Comment') do
-      response(200, 'updated successfully') do
-        let(:id) { '2' }
-        tags 'Comments'
+  path '/api/v1/news/{id}' do
+    get('Show News') do
+      response(200, 'succesful') do
+        let(:id) { '123' }
+        tags 'News'
         consumes 'application/json'
         security [Bearer: {}]
         parameter name: :Authorization, in: :header, type: :string
         parameter name: :id, in: :path, type: :string
-        parameter name: :comment, in: :body, schema: {
+        schema type: :object,
+               properties: {
+                 categories: {
+                   type: :array,
+                   items: {
+                    properties: {
+                        content: { type: :string },
+                        name: { type: :string },
+                        news_type: {type: :string},
+                        category_id: {type: :integer}
+                      }
+                   }
+                 }
+               }
+
+        after do |example|
+          example.metadata[:response][:content] = {
+            'application/json' => {
+              example: JSON.parse(response.body, symbolize_names: true)
+            }
+          }
+        end
+
+        run_test!
+      end
+    end
+
+    put('Update News') do
+      response(200, 'updated successfully') do
+        let(:id) { '123' }
+        tags 'News'
+        consumes 'application/json'
+        security [Bearer: {}]
+        parameter name: :Authorization, in: :header, type: :string
+        parameter name: :id, in: :path, type: :string
+        parameter name: :news, in: :body, schema: {
           type: :object,
           properties: {
-            body: { type: :string, example: 'body-comment' }
+            content: { type: :text },
+            name: { type: :string },
+            news_type: {type: :string},
+            category_id: {type: :integer}
           },
-          required: %w[body]
+          required: %w[name]
         }
 
         after do |example|
@@ -103,10 +145,10 @@ describe 'Comments API' do
       end
     end
 
-    delete('Delete Comment') do
+    delete('Delete News') do
       response(204, 'deleted') do
-        let(:id) { 1 }
-        tags 'Comments'
+        let(:id) { '1' }
+        tags 'News'
         consumes 'application/json'
         security [Bearer: {}]
         parameter name: :Authorization, in: :header, type: :string

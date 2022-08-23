@@ -30,5 +30,5 @@ class News < ApplicationRecord
   belongs_to :category
   has_many :comments, dependent: :destroy
 
-  validates :name, :content, :image, presence: true
+  validates :name, :content, presence: true
 end
